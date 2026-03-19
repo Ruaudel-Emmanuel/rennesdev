@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio – Emmanuel Ruaudel · Automatisation IA & API</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,20,0.92);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    .nav-brand {
+      color: #fff; font-weight: 700; font-size: 1rem; letter-spacing: -0.01em;
+    }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); font-size: 0.9rem; transition: color .2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active { color: #fff; font-weight: 600; }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 120px 2rem 80px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #0f172a 100%);
+      text-align: center;
+      color: #fff;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(37,99,235,0.25);
+      border: 1px solid rgba(37,99,235,0.5);
+      color: #93c5fd;
+      font-size: 0.8rem; font-weight: 600;
+      padding: 0.3rem 0.9rem; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; line-height: 1.15;
+      max-width: 700px; margin: 0 auto 1rem;
+    }
+    .hero h1 span { color: #60a5fa; }
+    .hero p {
+      font-size: 1.1rem; color: rgba(255,255,255,0.75);
+      max-width: 560px; margin: 0 auto 2rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: #2563eb;
+      color: #fff; font-weight: 600;
+      padding: 0.8rem 1.8rem;
+      border-radius: 30px;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); }
+
+    /* ===== STATS BAND ===== */
+    .stats-band {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 2.5rem 2rem;
+    }
+    .stats-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .number {
+      font-size: 2.2rem; font-weight: 800; color: #2563eb; line-height: 1;
+    }
+    .stat-item .label {
+      font-size: 0.85rem; color: #64748b; margin-top: 0.3rem;
+    }
+
+    /* ===== SECTIONS ===== */
+    .section { padding: 5rem 2rem; }
+    .section-alt { background: #f4f4f5; }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .section-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800; margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      color: #64748b; font-size: 1rem; margin-bottom: 3rem; max-width: 600px;
+    }
+
+    /* ===== FILTRES ===== */
+    .filters {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      background: #fff; border: 1.5px solid #e2e8f0;
+      color: #475569; font-size: 0.85rem; font-weight: 500;
+      padding: 0.4rem 1rem; border-radius: 20px;
+      cursor: pointer; transition: all .2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: #2563eb; border-color: #2563eb; color: #fff;
+    }
+
+    /* ===== CARDS GRILLE ===== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .case-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.8rem;
+      transition: box-shadow .2s, transform .2s;
+      display: flex; flex-direction: column; gap: 0.8rem;
+    }
+    .case-card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+    }
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .card-tag {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700;
+      padding: 0.25rem 0.7rem; border-radius: 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .tag-automation { background: #dbeafe; color: #1d4ed8; }
+    .tag-api        { background: #d1fae5; color: #065f46; }
+    .tag-reporting  { background: #fef3c7; color: #92400e; }
+    .tag-vba        { background: #ede9fe; color: #4c1d95; }
+    .tag-scraping   { background: #fee2e2; color: #991b1b; }
+
+    .card-icon { font-size: 1.6rem; }
+
+    .card-metric {
+      font-size: 2rem; font-weight: 800; color: #2563eb; line-height: 1;
+    }
+    .card-metric-label {
+      font-size: 0.8rem; color: #64748b; margin-top: -0.3rem;
+    }
+    .case-card h3 {
+      font-size: 1rem; font-weight: 700; color: #0f172a;
+    }
+    .case-card .context {
+      font-size: 0.88rem; color: #475569; line-height: 1.55;
+    }
+    .card-results {
+      list-style: none; margin-top: 0.2rem;
+    }
+    .card-results li {
+      font-size: 0.85rem; color: #374151;
+      padding: 0.2rem 0;
+      display: flex; align-items: flex-start; gap: 0.5rem;
+    }
+    .card-results li::before {
+      content: "✓"; color: #2563eb; font-weight: 700; flex-shrink: 0;
+    }
+    .card-stack {
+      margin-top: auto;
+      font-size: 0.76rem; color: #94a3b8;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 0.8rem;
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline { display: flex; flex-direction: column; gap: 2rem; margin-top: 1rem; }
+    .timeline-item {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+    }
+    .timeline-dot {
+      flex-shrink: 0; width: 14px; height: 14px;
+      background: #2563eb; border-radius: 50%;
+      margin-top: 0.4rem;
+      box-shadow: 0 0 0 4px #dbeafe;
+    }
+    .timeline-content h3 { font-size: 1rem; font-weight: 700; }
+    .timeline-content .date {
+      font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.3rem;
+    }
+    .timeline-content p { font-size: 0.88rem; color: #475569; }
+    .timeline-badge {
+      display: inline-block; margin-top: 0.5rem;
+      background: #dbeafe; color: #1d4ed8;
+      font-size: 0.75rem; font-weight: 700;
+      padding: 0.2rem 0.6rem; border-radius: 8px;
+    }
+
+    /* ===== CTA FINAL ===== */
+    .cta-section {
+      background: linear-gradient(135deg, #1e3a5f, #0f172a);
+      padding: 5rem 2rem;
+      text-align: center;
+      color: #fff;
+    }
+    .cta-section h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800; margin-bottom: 1rem;
+    }
+    .cta-section p {
+      color: rgba(255,255,255,0.7); max-width: 500px; margin: 0 auto 2rem;
+    }
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.4);
+      color: #fff; font-weight: 600;
+      padding: 0.75rem 1.6rem; border-radius: 30px;
+      margin-left: 0.8rem;
+      transition: all .2s;
+    }
+    .btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0f172a; color: rgba(255,255,255,0.4);
+      text-align: center; padding: 1.5rem;
+      font-size: 0.82rem;
+    }
+    footer a { color: rgba(255,255,255,0.6); }
+    footer a:hover { color: #fff; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .stats-inner { gap: 1.2rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-brand">Emmanuel Ruaudel</span>
+    <div class="nav-links">
+      <a href="https://rennesdev.fr/">Accueil</a>
+      <a href="https://rennesdev.fr/#services">Services</a>
+      <a href="https://rennesdev.fr/portfolio.html" class="active">Portfolio</a>
+      <a href="https://rennesdev.fr/#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Résultats clients · Cas réels</div>
+    <h1>Ce que mes clients ont <span>gagné</span> grâce à l'automatisation</h1>
+    <p>Des projets concrets, des chiffres réels. Pas de jargon technique — juste le temps et l'argent économisés.</p>
+    <a href="https://rennesdev.fr/#contact" class="btn-primary">Parler de votre projet</a>
+  </section>
+
+  <!-- STATS BAND -->
+  <section class="stats-band">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="number">+1 200 h</div>
+        <div class="label">économisées tous clients confondus</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">−95 %</div>
+        <div class="label">temps de traitement (enrichissement données)</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">−80 %</div>
+        <div class="label">erreurs de saisie manuelle</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">&lt; 2 mois</div>
+        <div class="label">retour sur investissement moyen</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">10 h/sem</div>
+        <div class="label">récupérées en moyenne par client</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAS CLIENTS -->
+  <section class="section" id="cas-clients">
+    <div class="container">
+      <h2 class="section-title">Cas clients</h2>
+      <p class="section-sub">Chaque mission part d'un problème concret. Voici ce qui a été livré, et ce que ça a changé.</p>
+
+      <!-- FILTRES -->
+      <div class="filters">
+        <button class="filter-btn active" onclick="filterCards('all', this)">Tous</button>
+        <button class="filter-btn" onclick="filterCards('automation', this)">Automatisation</button>
+        <button class="filter-btn" onclick="filterCards('api', this)">API & Intégrations</button>
+        <button class="filter-btn" onclick="filterCards('reporting', this)">Reporting & PDF</button>
+        <button class="filter-btn" onclick="filterCards('vba', this)">VBA & Excel</button>
+        <button class="filter-btn" onclick="filterCards('scraping', this)">Scraping & Données</button>
+      </div>
+
+      <!-- GRILLE CARTES -->
+      <div class="cards-grid" id="cards-grid">
+
+        <!-- CAS 1 : Enrichissement Google Sheets / N8N -->
+        <div class="case-card" data-category="automation api">
+          <div class="card-header">
+            <span class="card-tag tag-automation">Automatisation</span>
+            <span class="card-icon">⚡</span>
+          </div>
+          <div class="card-metric">−95 %</div>
+          <div class="card-metric-label">de temps de traitement</div>
+          <h3>Enrichissement massif de données – PME e-commerce</h3>
+          <p class="context">
+            Des milliers de lignes Google Sheets à enrichir via des API externes.
+            Traitement manuel : <strong>8h par lot</strong>, tâches bloquées, erreurs non tracées,
+            perte de données en cas d'interruption.
+          </p>
+          <ul class="card-results">
+            >8h → moins de 25 min par lot de traitement</li>
+            >100 000 lignes traitées sans intervention manuelle</li>
+            >100 % des erreurs tracées et loguées automatiquement</li>
+            >Dashboard KPI temps réel (taux de succès, durée, volume)</li>
+            >Zéro perte de données grâce à la préservation des sources</li>
+          </ul>
+          <div class="card-stack">N8N · Google Sheets API · REST API · Traitement batch asynchrone</div>
+        </div>
+
+        <!-- CAS 2 : Automatisation parcours client Zapier + Python -->
+        <div class="case-card" data-category="automation api">
+          <div class="card-header">
+            <span class="card-tag tag-api">API & Intégrations</span>
+            <span class="card-icon">🔄</span>
+          </div>
+          <div class="card-metric">100 %</div>
+          <div class="card-metric-label">du parcours client automatisé</div>
+          <h3>Parcours client end-to-end – SaaS / Infoproduit</h3>
+          <p class="context">
+            Inscription, paiement, livraison de contenu et relances gérés manuellement.
+            Risque d'oublis, de retards et d'expériences client dégradées.
+          </p>
+          <ul class="card-results">
+            >Inscription automatique + email de bienvenue instantané</li>
+            >Templates email responsifs générés dynamiquement</li>
+            >Webhooks Stripe/PayPal intégrés, livraison post-paiement automatisée</li>
+            >Gestion avancée des erreurs avec récupération intelligente</li>
+            >Flux d'authentification API sécurisé</li>
+          </ul>
+          <div class="card-stack">Zapier · Python · Stripe · PayPal · Gmail API</div>
+        </div>
+
+        <!-- CAS 3 : Automatisation admin PME / Indépendants -->
+        <div class="case-card" data-category="automation reporting">
+          <div class="card-header">
+            <span class="card-tag tag-automation">Automatisation</span>
+            <span class="card-icon">🕐</span>
+          </div>
+          <div class="card-metric">10 h/sem</div>
+          <div class="card-metric-label">récupérées sur les tâches administratives</div>
+          <h3>Automatisation administrative – PME & indépendants</h3>
+          <p class="context">
+            Saisie manuelle, relances oubliées, rapports Excel refaits à zéro chaque semaine.
+            Des frictions invisibles qui coûtaient cher en temps et en concentration.
+          </p>
+          <ul class="card-results">
+            >−80 % d'erreurs de saisie</li>
+            >Délais de traitement divisés par 3 sur devis et factures</li>
+            >ROI atteint en moins de 2 mois</li>
+            >Relances clients automatisées, zéro oubli</li>
+          </ul>
+          <div class="card-stack">Python · Django · FastAPI · N8N · Make · Zapier</div>
+        </div>
+
+        <!-- CAS 4 : Générateur de devis VBA – Ville de Rennes -->
+        <div class="case-card" data-category="vba reporting">
+          <div class="card-header">
+            <span class="card-tag tag-vba">VBA & Excel</span>
+            <span class="card-icon">📋</span>
+          </div>
+          <div class="card-metric">−60 %</div>
+          <div class="card-metric-label">de temps par devis produit</div>
+          <h3>Générateur de devis automatisé – Ville de Rennes (Maîtrise d'œuvre)</h3>
+          <p class="context">
+            Service espaces verts : chaque devis de travaux paysagers prenait 1h30 à produire
+            manuellement depuis un bordereau de prix non centralisé.
+          </p>
+          <ul class="card-results">
+            >1h30 → 30 min par devis (−60 %)</li>
+            >40 à 60 heures économisées par an</li>
+            >Catalogue centralisé avec filtrage et sélection rapide</li>
+            >Calcul automatique des montants (RECHERCHEV + macros VBA)</li>
+            >Export propre, sans lignes vides, prêt à imprimer</li>
+          </ul>
+          <div class="card-stack">VBA · Excel · Macros · Bordereau de prix structuré</div>
+        </div>
+
+        <!-- CAS 5 : Générateur devis VBA 2010 – Mairie Rennes -->
+        <div class="case-card" data-category="vba reporting">
+          <div class="card-header">
+            <span class="card-tag tag-vba">VBA & Excel</span>
+            <span class="card-icon">🏛️</span>
+          </div>
+          <div class="card-metric">+fiabilité</div>
+          <div class="card-metric-label">et lisibilité des devis publics</div>
+          <h3>Générateur de devis v1 – Mairie de Rennes (2010)</h3>
+          <p class="context">
+            Première version de l'outil pour la maîtrise d'œuvre municipale.
+            Processus de devis non standardisé, lignes vides à supprimer manuellement,
+            aucun filtre par famille de travaux.
+          </p>
+          <ul class="card-results">
+            >Masquage automatique des lignes vides à l'impression</li>
+            >Filtrage par famille (terrassement, plantations, réseaux…)</li>
+            >Interface de sélection : code, libellé, unité, quantité, prix HT</li>
+            >Adoption rapide par les équipes grâce à l'ergonomie soignée</li>
+          </ul>
+          <div class="card-stack">VBA · Excel · Macros de filtrage · Export impression</div>
+        </div>
+
+        <!-- CAS 6 : Génération rapports PDF automatisés -->
+        <div class="case-card" data-category="reporting automation">
+          <div class="card-header">
+            <span class="card-tag tag-reporting">Reporting & PDF</span>
+            <span class="card-icon">📄</span>
+          </div>
+          <div class="card-metric">÷3</div>
+          <div class="card-metric-label">sur les délais de génération de rapports</div>
+          <h3>Rapports PDF automatisés – Clients récurrents</h3>
+          <p class="context">
+            Génération manuelle de rapports depuis des données Google Sheets : mise en forme longue,
+            risques d'erreurs de copier-coller, envoi oublié.
+          </p>
+          <ul class="card-results">
+            >Génération automatique depuis Google Sheets → PDF mis en page</li>
+            >Envoi automatisé par email à chaque destinataire</li>
+            >Templates personnalisables via Jinja2</li>
+            >Délais divisés par 3, zéro intervention manuelle</li>
+          </ul>
+          <div class="card-stack">Python · Jinja2 · WeasyPrint · Gmail API · Google Sheets</div>
+        </div>
+
+      </div><!-- /cards-grid -->
+    </div>
+  </section>
+
+  <!-- TIMELINE EXPÉRIENCES -->
+  <section class="section section-alt" id="parcours">
+    <div class="container">
+      <h2 class="section-title">Parcours & expériences clés</h2>
+      <p class="section-sub">15 ans de terrain avant le code — je comprends les contraintes métier avant de coder la solution.</p>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="date">2025 – présent</div>
+            <h3>Développeur Full Stack – Automatisation parcours client</h3>
+            <p>Automatisation complète : inscription, email, paiement Stripe/PayPal, livraison de contenu, gestion d'erreurs. Stack Zapier + Python.</p>
+            <span class="timeline-badge">Parcours client 100 % automatisé</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="date">2025 – 2026</div>
+            <h3>Workflow N8N – Enrichissement données à grande échelle</h3>
+            <p>Traitement batch asynchrone de 100 000 lignes Google Sheets. Temps réduit de 8h à 25 min. Dashboard KPI temps réel.</p>
+            <span class="timeline-badge">−95 % temps de traitement</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="date">2026</div>
+            <h3>Automatisation administrative – PME & indépendants</h3>
+            <p>Facturation, relances, rapports, synchronisation d'outils. Jusqu'à 10h/semaine récupérées. ROI en moins de 2 mois.</p>
+            <span class="timeline-badge">10 h/semaine récupérées</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="date">2020</div>
+            <h3>Développeur VBA – Générateur de devis paysagers · Ville de Rennes</h3>
+            <p>Outil de génération de devis pour la maîtrise d'œuvre. Catalogue centralisé, calcul automatique, export propre.</p>
+            <span class="timeline-badge">40–60 h/an économisées</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="date">2010</div>
+            <h3>Développeur VBA – Générateur de devis v1 · Mairie de Rennes</h3>
+            <p>Première automatisation du processus devis pour le service espaces verts. Filtrage, masquage, ergonomie impression.</p>
+            <span class="timeline-badge">Adoption immédiate par les équipes</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section">
+    <h2>Vous voulez le même résultat ?</h2>
+    <p>Décrivez-moi vos tâches les plus chronophages. Je reviens vers vous sous 24h avec une proposition concrète et chiffrée.</p>
+    <a href="https://rennesdev.fr/#contact" class="btn-primary">Parler de votre projet</a>
+    <a href="https://www.malt.fr/profile/emmanuelruaudel" class="btn-secondary" target="_blank">Mon profil Malt</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © Emmanuel Ruaudel –
+    <a href="https://rennesdev.fr/">rennesdev.fr</a> ·
+    <a href="https://www.linkedin.com/in/emmanuelruaudel-bb5059362" target="_blank">LinkedIn</a> ·
+    <a href="https://www.malt.fr/profile/emmanuelruaudel" target="_blank">Malt</a>
+  </footer>
+
+  <!-- JS FILTRES -->
+  <script>
+    function filterCards(category, btn) {
+      // Mise à jour bouton actif
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filtrage des cartes
+      document.querySelectorAll('.case-card').forEach(card => {
+        const cats = card.dataset.category || '';
+        if (category === 'all' || cats.includes(category)) {
+          card.style.display = '';
+          // Petite animation
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(10px)';
+          setTimeout(() => {
+            card.style.transition = 'opacity .3s, transform .3s';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 10);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
+<!--  -->
