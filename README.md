@@ -1,91 +1,81 @@
-Developer Portfolio – Next.js
-A minimal personal website built with Next.js (App Router) to present my freelance developer activity, display my daily rate, and collect leads through a Tally contact form.
 
-Features
-Single-page layout with:
+# rennesdev.fr – Freelance Automation Website
 
-Short introduction and services
+This project is the marketing website for my freelance activity as a Python & automation engineer.  
+It is a **single-page PHP/HTML site** hosted on Infomaniak, designed to be fast, simple to maintain, and focused on lead generation.
 
-Display of current daily rate (TJM)
+## Why I pivoted from Node/Next.js to PHP
 
-Contact section powered by a Tally form embed
+Initially, I started with a Next.js (Node.js) stack to host the site on Infomaniak.  
+While this works technically, it quickly introduced unnecessary complexity for a simple one-page website:
 
-Built with the Next.js App Router
+- Build and runtime management: I had to handle `npm install`, `npm run build`, and `npm run start` on a constrained shared hosting environment.  
+- Limited SSH resources: builds often got stuck at “Collecting page data”, requiring the use of Infomaniak’s Node.js Builder to complete.  
+- Overkill for the need: the site is basically static content plus a Tally contact form, so the benefits of React/Next.js were minimal compared to the operational overhead.
 
-Simple responsive layout using basic CSS
+Because the **business goal** is to have a clear, reliable landing page that converts visitors into leads, I decided to pivot to a classic PHP/HTML stack:
 
-Ready to be deployed on any Node.js hosting provider (including Infomaniak)
+- No build step, no Node.js runtime to manage.  
+- Deployment is just “upload files via FTP/WebFTP”.  
+- Easier to maintain over time while I focus on client work, not infrastructure.
 
-Tech Stack
-Next.js 14 (App Router)
+## Simple project structure
 
-React 18
+The site lives at the root of the Infomaniak web hosting:
 
-TypeScript or JavaScript (choose when creating the app)
+```text
+rennesdev.fr/
+  index.php              # Single-page site
+  assets/
+    css/
+      style.css          # Global styles
+    img/
+      banniere-codeur.jpg  # Banner visual
+```
 
-Tally for the contact form embed
+- `index.php` contains all the content sections: hero, services, pricing packages, about, and contact.  
+- `style.css` provides a minimal, responsive layout that reflects the banner’s dark/tech visual identity.  
+- The banner image is used as a background in the hero section.
 
-Getting Started
-1. Install dependencies
-bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-2. Run the development server
-bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-Open your browser at http://localhost:3000 to view the site.
+## Content and positioning
 
-Project Structure
-bash
-app/
-  layout.tsx      # Root layout and metadata
-  page.tsx        # Main page (intro + rate + contact)
-  globals.css     # Global styles
-next.config.mjs   # Next.js configuration
-package.json      # Dependencies and scripts
-Tally Contact Form
-The contact section uses a Tally embed inside app/page.tsx.
+The page is designed around a clear positioning:
 
-Replace YOUR_FORM_ID in the data-tally-src attribute with the ID of your own Tally form:
+- **“Automatisation IA & API Python”** for SMEs and independents.  
+- Promise: helping clients save around **10 hours per week** on repetitive tasks.  
+- Social proof and credibility are supported by links to my LinkedIn, Malt profile, and technical portfolio.
 
-tsx
-<iframe
-  data-tally-src="https://tally.so/embed/YOUR_FORM_ID?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-  ...
-></iframe>
-You can find the form ID and embed code from your Tally dashboard under “Share” → “Embed”.
+Main sections:
 
-Production Build
-Build the application for production:
+1. **Hero**  
+   - Headline: automated, custom solutions, aligned with my LinkedIn messaging.  
+   - Short subtitle explaining what I do and who I help.  
+   - Primary CTA: “Parler de votre projet” linking to the contact section.
 
-bash
-npm run build
-npm run start
-This will start the app in production mode on port 3000 by default.
+2. **What I do**  
+   - Description of automation work: workflows, API integrations, dashboards.  
+   - Three pillars: business automation, APIs & integrations, dashboards.
 
-Deployment Notes (Node.js hosting)
-On a Node.js hosting platform (such as Infomaniak):
+3. **Packages (forfaits)**  
+   - “Forfait Automatisation PME” – around 2,000 € for a two-week engagement (analysis, 1–2 workflows, simple dashboard, training).  
+   - “Forfait Indépendants & Freelances” – a lighter package focused on admin/workflow automation.  
+   - “Forfait Site Internet” – a website package (1,000–1,500 €) including a simple site and an integrated contact form.
 
-Upload the project files
+4. **About**  
+   - Short bio: mix of project management, field experience, and automation expertise.  
+   - Links to LinkedIn, Malt, portfolio.
 
-Install dependencies (npm install)
+5. **Contact (Tally form)**  
+   - A Tally form embedded via an `<iframe>`, connected to my Notion workspace.  
+   - The goal is to collect qualified leads with a brief description of their pain points and automation needs.
 
-Run the production build (npm run build)
+## How it will be deployed
 
-Configure the start command to npm run start
+Deployment is intentionally simple:
 
-Make sure the correct Node.js version is selected in your hosting environment
+1. Edit and test `index.php` and `assets/css/style.css` locally in a browser.  
+2. Upload the files to the Infomaniak PHP web hosting via FTP/WebFTP.  
+3. Replace `YOUR_FORM_ID` in the Tally embed URL with the actual Tally form ID.  
+4. Verify that `https://rennesdev.fr` serves the single-page site and that the Tally form submits data correctly to Notion.
 
-Customization
-Update the text content (name, services, daily rate) in app/page.tsx
-
-Adjust styles in app/globals.css and inline styles
-
-Optionally add more sections (projects, skills, testimonials) as additional components or routes
+This approach keeps the stack as lightweight as possible so I can spend time on **client-facing automation projects** instead of debugging Node.js builds on shared hosting.
