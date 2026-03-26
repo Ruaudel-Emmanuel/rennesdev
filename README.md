@@ -1,7 +1,7 @@
 
 # rennesdev.fr – Freelance Automation Website
 
-This project is the marketing website for my freelance activity as a Python & automation engineer.  
+This project is the marketing website for my freelance activity as a Python & automation.  
 It is a **single-page PHP/HTML site** hosted on Infomaniak, designed to be fast, simple to maintain, and focused on lead generation.
 
 ## Why I pivoted from Node/Next.js to PHP
