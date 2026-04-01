@@ -175,19 +175,55 @@
       </div>
     </section>
 
-    <section class="section" id="contact" aria-labelledby="contact-title">
-      <div class="container">
-        <h2 id="contact-title">Contact</h2>
-        <p>
-          Vous êtes une PME ou un indépendant à Rennes ou ailleurs et vous voulez
-          automatiser vos tâches répétitives ? Parlons-en.
-        </p>
-        <p>
-          <a href="mailto:contact@rennesdev.fr">contact@rennesdev.fr</a>
-        </p>
-      </div>
-    </section>
-  </main>
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="container">
+    <h2 id="contact-title">Contact</h2>
+    <p>
+      Vous êtes une PME ou un indépendant à Rennes ou ailleurs et vous voulez
+      automatiser vos tâches répétitives ? Décrivez votre besoin via le formulaire
+      ci-dessous.
+    </p>
+
+    <div class="contact-form-card">
+      <iframe
+        data-tally-src="https://tally.so/embed/WO26DL?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+        loading="lazy"
+        width="100%"
+        height="420"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title="Formulaire de contact RennesDev"
+      ></iframe>
+    </div>
+
+    <p class="contact-alt">
+      Si vous préférez, vous pouvez aussi m’écrire directement à
+      <a href="mailto:contact@rennesdev.fr">contact@rennesdev.fr</a>.
+    </p>
+  </div>
+</section>
+
+<script>
+  var d = document, w = "https://tally.so/widgets/embed.js", v = function () {
+    if (typeof Tally !== "undefined") {
+      Tally.loadEmbeds();
+    } else {
+      d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
+        e.src = e.dataset.tallySrc;
+      });
+    }
+  };
+  if (typeof Tally !== "undefined") {
+    v();
+  } else if (d.querySelector('script[src="' + w + '"]') == null) {
+    var s = d.createElement("script");
+    s.src = w;
+    s.onload = v;
+    s.onerror = v;
+    d.body.appendChild(s);
+  }
+</script>
 
   <footer class="site-footer">
     <div class="container">
