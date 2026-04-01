@@ -1,81 +1,93 @@
+# RennesDev Website
 
-# rennesdev.fr – Freelance Automation Website
+Official static website for RennesDev, the freelance business of Emmanuel Ruaudel.
 
-This project is the marketing website for my freelance activity as a Python & automation.  
-It is a **single-page PHP/HTML site** hosted on Infomaniak, designed to be fast, simple to maintain, and focused on lead generation.
+This project is a lightweight HTML/CSS website focused on:
+- clear positioning for SMEs and independent professionals,
+- better technical SEO foundations,
+- simple maintenance and deployment,
+- compatibility with standard static hosting environments such as Infomaniak.
 
-## Why I pivoted from Node/Next.js to PHP
+## Project Goal
 
-Initially, I started with a Next.js (Node.js) stack to host the site on Infomaniak.  
-While this works technically, it quickly introduced unnecessary complexity for a simple one-page website:
+The website promotes freelance services around:
+- Python automation,
+- API integrations,
+- workflow automation,
+- dashboards and operational tools,
+- process optimization for small businesses.
 
-- Build and runtime management: I had to handle `npm install`, `npm run build`, and `npm run start` on a constrained shared hosting environment.  
-- Limited SSH resources: builds often got stuck at “Collecting page data”, requiring the use of Infomaniak’s Node.js Builder to complete.  
-- Overkill for the need: the site is basically static content plus a Tally contact form, so the benefits of React/Next.js were minimal compared to the operational overhead.
+The site is designed to stay simple, fast, readable, and easy to update without a framework.
 
-Because the **business goal** is to have a clear, reliable landing page that converts visitors into leads, I decided to pivot to a classic PHP/HTML stack:
+## Current Stack
 
-- No build step, no Node.js runtime to manage.  
-- Deployment is just “upload files via FTP/WebFTP”.  
-- Easier to maintain over time while I focus on client work, not infrastructure.
+- HTML5
+- CSS3
+- Static assets
+- Tally form integration
+- Google Tag Manager
+- JSON-LD structured data
 
-## Simple project structure
+No JavaScript framework, no build step, no backend required.
 
-The site lives at the root of the Infomaniak web hosting:
+## File Structure
 
 ```text
 rennesdev.fr/
-  index.php              # Single-page site
-  assets/
-    css/
-      style.css          # Global styles
-    img/
-      banniere-codeur.jpg  # Banner visual
+├── index.html
+├── portofolio.html
+└── assets/
+    ├── css/
+    │   └── style.css
+    └── img/
+        └── banniere-codeur.jpg
 ```
 
-- `index.php` contains all the content sections: hero, services, pricing packages, about, and contact.  
-- `style.css` provides a minimal, responsive layout that reflects the banner’s dark/tech visual identity.  
-- The banner image is used as a background in the hero section.
+## Important Paths
 
-## Content and positioning
+Because the site is deployed with this structure, asset paths must match it exactly.
 
-The page is designed around a clear positioning:
+### In `index.html`
 
-- **“Automatisation IA & API Python”** for SMEs and independents.  
-- Promise: helping clients save around **10 hours per week** on repetitive tasks.  
-- Social proof and credibility are supported by links to my LinkedIn, Malt profile, and technical portfolio.
+CSS:
+```html
+<link rel="stylesheet" href="./assets/css/style.css">
+```
 
-Main sections:
+Hero image:
+```html
+<img src="./assets/img/banniere-codeur.jpg" alt="" class="hero__bg">
+```
 
-1. **Hero**  
-   - Headline: automated, custom solutions, aligned with my LinkedIn messaging.  
-   - Short subtitle explaining what I do and who I help.  
-   - Primary CTA: “Parler de votre projet” linking to the contact section.
+Social preview image:
+```html
+<meta property="og:image" content="https://rennesdev.fr/assets/img/banniere-codeur.jpg">
+<meta name="twitter:image" content="https://rennesdev.fr/assets/img/banniere-codeur.jpg">
+```
 
-2. **What I do**  
-   - Description of automation work: workflows, API integrations, dashboards.  
-   - Three pillars: business automation, APIs & integrations, dashboards.
+## SEO Improvements Included
 
-3. **Packages (forfaits)**  
-   - “Forfait Automatisation PME” – around 2,000 € for a two-week engagement (analysis, 1–2 workflows, simple dashboard, training).  
-   - “Forfait Indépendants & Freelances” – a lighter package focused on admin/workflow automation.  
-   - “Forfait Site Internet” – a website package (1,000–1,500 €) including a simple site and an integrated contact form.
+The current version includes:
+- a unique title tag,
+- a meta description,
+- canonical URL,
+- Open Graph tags,
+- Twitter Card tags,
+- structured data with `ProfessionalService`,
+- semantic section structure,
+- internal anchor navigation,
+- service-oriented headings,
+- local intent around Rennes and Brittany.
 
-4. **About**  
-   - Short bio: mix of project management, field experience, and automation expertise.  
-   - Links to LinkedIn, Malt, portfolio.
+These elements support technical SEO, content clarity, and better page interpretation by search engines. [web:83][web:86]
 
-5. **Contact (Tally form)**  
-   - A Tally form embedded via an `<iframe>`, connected to my Notion workspace.  
-   - The goal is to collect qualified leads with a brief description of their pain points and automation needs.
+## Navigation
 
-## How it will be deployed
+The main navigation currently links to:
+- Services
+- Portfolio
+- About
+- Contact
 
-Deployment is intentionally simple:
-
-1. Edit and test `index.php` and `assets/css/style.css` locally in a browser.  
-2. Upload the files to the Infomaniak PHP web hosting via FTP/WebFTP.  
-3. Replace `YOUR_FORM_ID` in the Tally embed URL with the actual Tally form ID.  
-4. Verify that `https://rennesdev.fr` serves the single-page site and that the Tally form submits data correctly to Notion.
-
-This approach keeps the stack as lightweight as possible so I can spend time on **client-facing automation projects** instead of debugging Node.js builds on shared hosting.
+If the portfolio page keeps the current filename, use:
+```html
