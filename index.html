@@ -12,6 +12,7 @@
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://rennesdev.fr/">
 
+  <!-- Open Graph -->
   <meta property="og:locale" content="fr_FR">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Automatisation Python, IA et API à Rennes | Emmanuel Ruaudel">
@@ -23,6 +24,7 @@
   <meta property="og:site_name" content="RennesDev">
   <meta property="og:image" content="https://rennesdev.fr/banniere-codeur.jpg">
 
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Automatisation Python, IA et API à Rennes | Emmanuel Ruaudel">
   <meta
@@ -31,8 +33,10 @@
   >
   <meta name="twitter:image" content="https://rennesdev.fr/banniere-codeur.jpg">
 
+  <!-- CSS -->
   <link rel="stylesheet" href="./style.css">
 
+  <!-- Google Tag Manager -->
   <script>
     (function (w, d, s, l, i) {
       w[l] = w[l] || [];
@@ -45,7 +49,9 @@
       f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-TTQJKPBQ');
   </script>
+  <!-- End Google Tag Manager -->
 
+  <!-- Schema.org -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -69,6 +75,7 @@
   </script>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
   <noscript>
     <iframe
       src="https://www.googletagmanager.com/ns.html?id=GTM-TTQJKPBQ"
@@ -78,24 +85,27 @@
       title="Google Tag Manager"
     ></iframe>
   </noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-  <header class="site-header">
+  <!-- HEADER -->
+  <header class="site-header" id="top">
     <div class="container site-header__inner">
       <div class="site-header__brand">
         <a href="#top">RennesDev</a>
       </div>
       <nav aria-label="Navigation principale">
         <ul class="site-nav">
-          <li><a href="#services">Services</a></li>
           <li><a href="./portofolio.html">Portfolio</a></li>
-          <li><a href="#about">À propos</a></li>
+          <li><a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362" target="_blank" rel="noopener noreferrer">Linkedin</a></li>
+          <li><a href="https://www.malt.fr/profile/emmanuelruaudel" target="_blank" rel="noopener noreferrer">Malt</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <header class="hero" id="top">
+  <!-- HERO PRINCIPAL -->
+  <header class="hero">
     <img
       src="./banniere-codeur.jpg"
       alt=""
@@ -105,7 +115,6 @@
       width="1600"
       height="900"
     >
-
     <div class="hero__content">
       <p class="hero__kpi">
         Des solutions automatisées, 100&nbsp;% adaptées à vos prospects.
@@ -124,107 +133,105 @@
   </header>
 
   <main>
-    <section class="section" id="services" aria-labelledby="services-title">
+    <!-- RESULTATS CLIENTS -->
+    <section class="section" aria-labelledby="results-title">
       <div class="container">
-        <h2 id="services-title">Ce que je fais</h2>
-        <p>
-          Je conçois des workflows et applications sur mesure pour connecter vos outils
-          (CRM, ERP, Google Sheets, SaaS) et fiabiliser vos flux de données, sans
-          bouleverser votre organisation.
-        </p>
-
-        <div class="services-grid">
-          <article class="service-card">
-            <h3>Automatisation métier</h3>
-            <p>
-              Relances clients, génération de devis/factures, synchronisation de
-              données entre outils.
-            </p>
-          </article>
-
-          <article class="service-card">
-            <h3>APIs &amp; intégrations</h3>
-            <p>
-              Création d'API REST, intégration Stripe, PayPal, Google Sheets,
-              Notion, CRM.
-            </p>
-          </article>
-
-          <article class="service-card">
-            <h3>Tableaux de bord</h3>
-            <p>
-              Suivi temps réel de vos flux&nbsp;: volumes traités, erreurs, délais,
-              ROI des automatisations.
-            </p>
-          </article>
-        </div>
+        <h2 id="results-title">Ce que mes clients ont gagné grâce à l'automatisation</h2>
       </div>
     </section>
 
-    <section class="section" id="about" aria-labelledby="about-title">
+    <!-- BANDE STATISTIQUES -->
+    <section class="stats-band" aria-label="Statistiques clés">
       <div class="container">
-        <h2 id="about-title">À propos</h2>
-        <p>
-          Je suis Emmanuel Ruaudel, développeur freelance basé à Rennes, spécialisé
-          en automatisation Python, IA, API et workflows no-code pour PME et indépendants.
-        </p>
-        <p>
-          Je travaille avec des entreprises bretonnes et francophones pour réduire
-          les tâches manuelles, sécuriser les données et dégager du temps pour le cœur
-          de votre activité.
-        </p>
+        <div class="stats-inner">
+         <div class="stat-item">
+          <div class="number">+1 200 h</div>
+          <div class="label">économisées tous clients confondus</div>
       </div>
-    </section>
-
-<section class="section" id="contact" aria-labelledby="contact-title">
-  <div class="container">
-    <h2 id="contact-title">Contact</h2>
-    <p>
-      Vous êtes une PME ou un indépendant à Rennes ou ailleurs et vous voulez
-      automatiser vos tâches répétitives ? Décrivez votre besoin via le formulaire
-      ci-dessous.
-    </p>
-
-    <div class="contact-form-card">
-      <iframe
-        data-tally-src="https://tally.so/embed/WO26DL?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-        loading="lazy"
-        width="100%"
-        height="420"
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
-        title="Formulaire de contact RennesDev"
-      ></iframe>
+      <div class="stat-item">
+        <div class="number">−95 %</div>
+        <div class="label">temps de traitement (enrichissement données)</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">−80 %</div>
+        <div class="label">erreurs de saisie manuelle</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">&lt; 2 mois</div>
+        <div class="label">retour sur investissement moyen</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">10 h/sem</div>
+        <div class="label">récupérées en moyenne par client</div>
+      </div>
     </div>
+
+    <p class="stats-more">
+      <a href="./portofolio.html">Voir des cas détaillés dans le portfolio</a>
+    </p>
   </div>
 </section>
 
-<script>
-  var d = document, w = "https://tally.so/widgets/embed.js", v = function () {
-    if (typeof Tally !== "undefined") {
-      Tally.loadEmbeds();
-    } else {
-      d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
-        e.src = e.dataset.tallySrc;
-      });
-    }
-  };
-  if (typeof Tally !== "undefined") {
-    v();
-  } else if (d.querySelector('script[src="' + w + '"]') == null) {
-    var s = d.createElement("script");
-    s.src = w;
-    s.onload = v;
-    s.onerror = v;
-    d.body.appendChild(s);
-  }
-</script>
+    <!-- CONTACT -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <h2 id="contact-title">Contact</h2>
+        <p>
 
+        <p>
+        Je crée des automatisations Python, IA et API pour réduire vos tâches manuelles.
+        Si vous voulez récupérer des heures chaque semaine, décrivez votre besoin dans le formulaire ci-dessous.
+        </p>
+
+        <div class="contact-form-card">
+          <iframe
+            data-tally-src="https://tally.so/embed/WO26DL?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy"
+            width="100%"
+            height="420"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title="Formulaire de contact RennesDev"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container">
       <p>&copy; 2026 Emmanuel Ruaudel - RennesDev</p>
     </div>
   </footer>
+
+  <!-- Script Tally -->
+  <script>
+    (function () {
+      var d = document,
+          w = "https://tally.so/widgets/embed.js";
+
+      function v() {
+        if (typeof Tally !== "undefined") {
+          Tally.loadEmbeds();
+        } else {
+          d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
+            e.src = e.dataset.tallySrc;
+          });
+        }
+      }
+
+      if (typeof Tally !== "undefined") {
+        v();
+      } else if (!d.querySelector('script[src="' + w + '"]')) {
+        var s = d.createElement("script");
+        s.src = w;
+        s.onload = v;
+        s.onerror = v;
+        d.body.appendChild(s);
+      }
+    })();
+  </script>
 </body>
 </html>
