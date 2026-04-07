@@ -88,7 +88,7 @@
 
     /* ===== SECTIONS ===== */
     .section { padding: 5rem 2rem; }
-    .section-alt { background: #f4f4f5; }
+    .section-alt { background: #ffff; }
     .container { max-width: 1080px; margin: 0 auto; }
     .section-title {
       font-size: clamp(1.4rem, 3vw, 2rem);
