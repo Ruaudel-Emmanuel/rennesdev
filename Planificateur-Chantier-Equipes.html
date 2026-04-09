@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificateur Chantier & Équipes</title>
+    <style>
+        :root {
+            --color-primary: #208091;
+            --color-primary-hover: #1a6472;
+            --color-primary-active: #155a65;
+            --color-success: #32b8c6;
+            --color-error: #c01f2f;
+            --color-warning: #a84b2f;
+            --color-info: #626c7c;
+            --color-bg-primary: #fcfcf9;
+            --color-bg-secondary: #ffffff;
+            --color-text-primary: #134252;
+            --color-text-secondary: #626c7c;
+            --color-border: #e8e8e8;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --radius-base: 8px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: var(--space-16);
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: var(--space-32);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: var(--color-text-secondary);
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: var(--space-16);
+            border-bottom: 2px solid var(--color-border);
+            margin-bottom: var(--space-24);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: var(--space-12) 0;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 150ms ease;
+        }
+
+        .tab-btn.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-section {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-24);
+            margin-bottom: var(--space-24);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-section h2 {
+            margin: 0 0 var(--space-24) 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-16);
+            margin-bottom: var(--space-16);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-8);
+            color: var(--color-text-primary);
+        }
+
+        input, select, textarea {
+            padding: var(--space-8) var(--space-12);
+            font-size: 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(32, 128, 145, 0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-8) var(--space-16);
+            border-radius: var(--radius-base);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 150ms ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+            margin-left: var(--space-8);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-bg-primary);
+        }
+
+        .btn-sm {
+            padding: var(--space-4) var(--space-12);
+            font-size: 13px;
+        }
+
+        .btn-danger {
+            background: var(--color-error);
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #a81b28;
+        }
+
+        .btn-success {
+            background: var(--color-success);
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #2a9dac;
+        }
+
+        .calendar-wrapper {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-24);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-24);
+        }
+
+        .calendar-header h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: var(--space-8);
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: var(--space-8);
+        }
+
+        .day-column {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-12);
+            min-height: 600px;
+        }
+
+        .day-header {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: var(--space-12);
+            padding-bottom: var(--space-12);
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .task-item {
+            background: var(--color-bg-secondary);
+            border-left: 4px solid var(--color-primary);
+            padding: var(--space-12);
+            margin-bottom: var(--space-12);
+            border-radius: 4px;
+            cursor: grab;
+            transition: all 150ms ease;
+            font-size: 13px;
+        }
+
+        .task-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .task-item.labour {
+            border-left-color: #208091;
+        }
+
+        .task-item.material {
+            border-left-color: #a84b2f;
+        }
+
+        .task-item.subcontracting {
+            border-left-color: #32b8c6;
+        }
+
+        .task-title {
+            font-weight: 600;
+            margin: 0 0 var(--space-4) 0;
+        }
+
+        .task-time {
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .task-team {
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            margin: var(--space-4) 0 0 0;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: var(--space-4);
+            margin-top: var(--space-8);
+        }
+
+        .task-delete {
+            background: var(--color-error);
+            color: #fff;
+            border: none;
+            padding: 2px 6px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .task-delete:hover {
+            background: #a81b28;
+        }
+
+        .teams-list {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-24);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .team-item {
+            padding: var(--space-16);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            margin-bottom: var(--space-12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .team-info h3 {
+            margin: 0 0 var(--space-4) 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .team-info p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .team-actions {
+            display: flex;
+            gap: var(--space-8);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: var(--space-4) var(--space-8);
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-available {
+            background: rgba(50, 184, 198, 0.15);
+            color: var(--color-success);
+        }
+
+        .badge-busy {
+            background: rgba(192, 31, 47, 0.15);
+            color: var(--color-error);
+        }
+
+        .export-options {
+            display: flex;
+            gap: var(--space-8);
+            margin-top: var(--space-16);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--space-32);
+            color: var(--color-text-secondary);
+        }
+
+        .empty-state p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: var(--space-16);
+                align-items: flex-start;
+            }
+
+            .week-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .day-column {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>📅 Planificateur Chantier & Équipes</h1>
+                <p class="subtitle">Gestion hebdomadaire visuelle avec assignation d'équipes</p>
+            </div>
+            <div class="export-options">
+                <button class="btn btn-success" onclick="exportCalendar()">📥 Exporter PDF</button>
+                <button class="btn btn-success" onclick="exportIcal()">📅 Exporter iCal</button>
+            </div>
+        </header>
+
+        <!-- Tabs de navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('calendar')">📋 Planning</button>
+            <button class="tab-btn" onclick="switchTab('add-task')">➕ Ajouter Tâche</button>
+            <button class="tab-btn" onclick="switchTab('teams')">👥 Équipes</button>
+        </div>
+
+        <!-- Tab 1: Planning hebdomadaire -->
+        <div id="calendar" class="tab-content active">
+            <div class="calendar-wrapper">
+                <div class="calendar-header">
+                    <h2 id="weekLabel">Semaine du 13 au 19 décembre 2025</h2>
+                    <div class="calendar-nav">
+                        <button class="btn btn-secondary btn-sm" onclick="previousWeek()">← Semaine précédente</button>
+                        <button class="btn btn-secondary btn-sm" onclick="currentWeek()">Aujourd'hui</button>
+                        <button class="btn btn-secondary btn-sm" onclick="nextWeek()">Semaine suivante →</button>
+                    </div>
+                </div>
+                <div class="week-grid" id="weekGrid"></div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Ajouter une tâche -->
+        <div id="add-task" class="tab-content">
+            <div class="form-section">
+                <h2>Créer une nouvelle tâche</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskChantier">Chantier / Site</label>
+                        <input type="text" id="taskChantier" placeholder="Ex: Dallage terrasse - Client X">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskTitle">Titre de la tâche</label>
+                        <input type="text" id="taskTitle" placeholder="Ex: Préparation terrain">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskDate">Date</label>
+                        <input type="date" id="taskDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskStartTime">Heure de début</label>
+                        <input type="time" id="taskStartTime">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskEndTime">Heure de fin</label>
+                        <input type="time" id="taskEndTime">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskTeam">Assigner à l'équipe</label>
+                        <select id="taskTeam">
+                            <option value="">-- Sélectionner une équipe --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskType">Type de tâche</label>
+                        <select id="taskType">
+                            <option value="labour">👷 Main d'œuvre</option>
+                            <option value="material">🏗️ Livraison matériel</option>
+                            <option value="subcontracting">🔧 Sous-traitance</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskDescription">Description</label>
+                        <textarea id="taskDescription" placeholder="Détails supplémentaires..." rows="3"></textarea>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addTask()">Créer la tâche</button>
+                <button class="btn btn-secondary" onclick="clearTaskForm()">Annuler</button>
+            </div>
+        </div>
+
+        <!-- Tab 3: Gestion des équipes -->
+        <div id="teams" class="tab-content">
+            <div class="form-section">
+                <h2>Ajouter une équipe / ouvrier / véhicule</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="teamName">Nom (ex: Équipe A, Maçon Jean, Camion 1)</label>
+                        <input type="text" id="teamName" placeholder="Équipe A">
+                    </div>
+                    <div class="form-group">
+                        <label for="teamRole">Rôle</label>
+                        <select id="teamRole">
+                            <option value="workers">👷 Équipe d'ouvriers</option>
+                            <option value="vehicle">🚚 Véhicule</option>
+                            <option value="equipment">🏗️ Engin</option>
+                            <option value="subcontractor">🔧 Sous-traitant</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="teamContact">Contact (tél/email)</label>
+                        <input type="text" id="teamContact" placeholder="+33 6 12 34 56 78">
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addTeam()">Ajouter l'équipe</button>
+            </div>
+
+            <div class="teams-list">
+                <h2>Équipes enregistrées</h2>
+                <div id="teamsList"></div>
+                <div id="emptyTeams" class="empty-state">
+                    <p>Aucune équipe créée. Commencez par en ajouter une !</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tasks = JSON.parse(localStorage.getItem('planningTasks')) || [];
+        let teams = JSON.parse(localStorage.getItem('planningTeams')) || [];
+        let currentWeekStart = new Date();
+        currentWeekStart.setDate(currentWeekStart.getDate() - currentWeekStart.getDay() + 1);
+
+        // Initialize date fields
+        document.getElementById('taskDate').valueAsDate = new Date();
+        document.getElementById('taskStartTime').value = '08:00';
+        document.getElementById('taskEndTime').value = '17:00';
+
+        function getMonday(d) {
+            const date = new Date(d);
+            const day = date.getDay();
+            const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+            return new Date(date.setDate(diff));
+        }
+
+        function formatDate(date) {
+            const options = { weekday: 'short', day: 'numeric', month: 'short' };
+            return date.toLocaleDateString('fr-FR', options);
+        }
+
+        function formatDateISO(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function previousWeek() {
+            currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+            renderWeek();
+        }
+
+        function nextWeek() {
+            currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+            renderWeek();
+        }
+
+        function currentWeek() {
+            currentWeekStart = getMonday(new Date());
+            renderWeek();
+        }
+
+        function addTask() {
+            const chantier = document.getElementById('taskChantier').value.trim();
+            const title = document.getElementById('taskTitle').value.trim();
+            const date = document.getElementById('taskDate').value;
+            const startTime = document.getElementById('taskStartTime').value;
+            const endTime = document.getElementById('taskEndTime').value;
+            const team = document.getElementById('taskTeam').value;
+            const type = document.getElementById('taskType').value;
+            const description = document.getElementById('taskDescription').value.trim();
+
+            if (!chantier || !title || !date || !startTime || !endTime || !team) {
+                alert('Veuillez remplir tous les champs obligatoires');
+                return;
+            }
+
+            const task = {
+                id: Date.now(),
+                chantier: chantier,
+                title: title,
+                date: date,
+                startTime: startTime,
+                endTime: endTime,
+                team: team,
+                type: type,
+                description: description
+            };
+
+            tasks.push(task);
+            saveData();
+            clearTaskForm();
+            renderWeek();
+            alert('Tâche créée avec succès !');
+        }
+
+        function clearTaskForm() {
+            document.getElementById('taskChantier').value = '';
+            document.getElementById('taskTitle').value = '';
+            document.getElementById('taskDate').valueAsDate = new Date();
+            document.getElementById('taskStartTime').value = '08:00';
+            document.getElementById('taskEndTime').value = '17:00';
+            document.getElementById('taskTeam').value = '';
+            document.getElementById('taskType').value = 'labour';
+            document.getElementById('taskDescription').value = '';
+        }
+
+        function addTeam() {
+            const name = document.getElementById('teamName').value.trim();
+            const role = document.getElementById('teamRole').value;
+            const contact = document.getElementById('teamContact').value.trim();
+
+            if (!name) {
+                alert('Veuillez entrer un nom d\'équipe');
+                return;
+            }
+
+            const team = {
+                id: Date.now(),
+                name: name,
+                role: role,
+                contact: contact
+            };
+
+            teams.push(team);
+            saveData();
+            document.getElementById('teamName').value = '';
+            document.getElementById('teamRole').value = 'workers';
+            document.getElementById('teamContact').value = '';
+            updateTeamsSelects();
+            renderTeams();
+            alert('Équipe ajoutée avec succès !');
+        }
+
+        function deleteTeam(teamId) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer cette équipe ?')) return;
+            teams = teams.filter(t => t.id !== teamId);
+            tasks = tasks.filter(task => task.team !== teamId);
+            saveData();
+            updateTeamsSelects();
+            renderTeams();
+        }
+
+        function deleteTask(taskId) {
+            tasks = tasks.filter(t => t.id !== taskId);
+            saveData();
+            renderWeek();
+        }
+
+        function renderWeek() {
+            const weekEnd = new Date(currentWeekStart);
+            weekEnd.setDate(weekEnd.getDate() + 6);
+            
+            const startStr = formatDate(currentWeekStart);
+            const endStr = formatDate(weekEnd);
+            document.getElementById('weekLabel').textContent = `Semaine du ${startStr} au ${endStr}`;
+
+            const grid = document.getElementById('weekGrid');
+            grid.innerHTML = '';
+
+            const days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(currentWeekStart);
+                date.setDate(date.getDate() + i);
+                const dateISO = formatDateISO(date);
+                const dayNum = date.getDate();
+
+                const col = document.createElement('div');
+                col.className = 'day-column';
+
+                const header = document.createElement('div');
+                header.className = 'day-header';
+                header.textContent = `${days[i]} ${dayNum}`;
+                col.appendChild(header);
+
+                const dayTasks = tasks.filter(t => t.date === dateISO);
+                
+                if (dayTasks.length === 0) {
+                    const empty = document.createElement('div');
+                    empty.style.color = 'var(--color-text-secondary)';
+                    empty.style.fontSize = '12px';
+                    empty.textContent = 'Aucune tâche';
+                    col.appendChild(empty);
+                } else {
+                    dayTasks.forEach(task => {
+                        const taskEl = document.createElement('div');
+                        taskEl.className = `task-item ${task.type}`;
+                        
+                        const teamObj = teams.find(t => t.id == task.team);
+                        const teamName = teamObj ? teamObj.name : 'Équipe ?';
+
+                        taskEl.innerHTML = `
+                            <p class="task-title">${task.title}</p>
+                            <p class="task-time">⏰ ${task.startTime} → ${task.endTime}</p>
+                            <p class="task-team">👥 ${teamName}</p>
+                            <p style="color: var(--color-text-secondary); font-size: 12px; margin: var(--space-4) 0 0 0;">${task.chantier}</p>
+                            <div class="task-actions">
+                                <button class="task-delete" onclick="deleteTask(${task.id})">Supprimer</button>
+                            </div>
+                        `;
+                        col.appendChild(taskEl);
+                    });
+                }
+
+                grid.appendChild(col);
+            }
+        }
+
+        function renderTeams() {
+            const list = document.getElementById('teamsList');
+            list.innerHTML = '';
+
+            if (teams.length === 0) {
+                document.getElementById('emptyTeams').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('emptyTeams').style.display = 'none';
+
+            teams.forEach(team => {
+                const activeCount = tasks.filter(t => t.team == team.id).length;
+                const roleLabel = {
+                    'workers': '👷 Équipe d\'ouvriers',
+                    'vehicle': '🚚 Véhicule',
+                    'equipment': '🏗️ Engin',
+                    'subcontractor': '🔧 Sous-traitant'
+                }[team.role] || team.role;
+
+                const item = document.createElement('div');
+                item.className = 'team-item';
+                item.innerHTML = `
+                    <div class="team-info">
+                        <h3>${team.name}</h3>
+                        <p>${roleLabel} • ${team.contact || 'Pas de contact'}</p>
+                        <p style="color: var(--color-primary); font-weight: 600; margin-top: var(--space-8);">${activeCount} tâche(s) assignée(s)</p>
+                    </div>
+                    <div class="team-actions">
+                        <span class="badge ${activeCount > 0 ? 'badge-busy' : 'badge-available'}">
+                            ${activeCount > 0 ? 'Occupé' : 'Disponible'}
+                        </span>
+                        <button class="btn btn-danger btn-sm" onclick="deleteTeam(${team.id})">Supprimer</button>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function updateTeamsSelects() {
+            const select = document.getElementById('taskTeam');
+            select.innerHTML = '<option value="">-- Sélectionner une équipe --</option>';
+            teams.forEach(team => {
+                const option = document.createElement('option');
+                option.value = team.id;
+                option.textContent = team.name;
+                select.appendChild(option);
+            });
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function exportCalendar() {
+            let content = 'PLANNING HEBDOMADAIRE\n';
+            content += '=====================\n\n';
+
+            const weekEnd = new Date(currentWeekStart);
+            weekEnd.setDate(weekEnd.getDate() + 6);
+            content += `Semaine du ${formatDate(currentWeekStart)} au ${formatDate(weekEnd)}\n\n`;
+
+            const days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(currentWeekStart);
+                date.setDate(date.getDate() + i);
+                const dateISO = formatDateISO(date);
+
+                content += `\n${days[i]} ${date.getDate()}\n`;
+                content += '─'.repeat(40) + '\n';
+
+                const dayTasks = tasks.filter(t => t.date === dateISO);
+                if (dayTasks.length === 0) {
+                    content += 'Aucune tâche\n';
+                } else {
+                    dayTasks.forEach(task => {
+                        const teamObj = teams.find(t => t.id == task.team);
+                        const teamName = teamObj ? teamObj.name : 'Équipe ?';
+                        content += `\n  • ${task.title}\n`;
+                        content += `    Heure: ${task.startTime} → ${task.endTime}\n`;
+                        content += `    Équipe: ${teamName}\n`;
+                        content += `    Site: ${task.chantier}\n`;
+                        if (task.description) content += `    Notes: ${task.description}\n`;
+                    });
+                }
+            }
+
+            downloadFile(content, 'planning.txt', 'text/plain');
+        }
+
+        function exportIcal() {
+            let ical = 'BEGIN:VCALENDAR\n';
+            ical += 'VERSION:2.0\n';
+            ical += 'PRODID:-//Planning Chantier//FR\n';
+            ical += 'CALSCALE:GREGORIAN\n';
+
+            tasks.forEach(task => {
+                const [year, month, day] = task.date.split('-');
+                const [startH, startM] = task.startTime.split(':');
+                const [endH, endM] = task.endTime.split(':');
+
+                const dtStart = `${year}${month}${day}T${startH}${startM}00`;
+                const dtEnd = `${year}${month}${day}T${endH}${endM}00`;
+
+                const teamObj = teams.find(t => t.id == task.team);
+                const teamName = teamObj ? teamObj.name : 'Équipe ?';
+
+                ical += 'BEGIN:VEVENT\n';
+                ical += `DTSTART:${dtStart}\n`;
+                ical += `DTEND:${dtEnd}\n`;
+                ical += `SUMMARY:${task.title} (${teamName})\n`;
+                ical += `DESCRIPTION:Chantier: ${task.chantier}. ${task.description || ''}\n`;
+                ical += 'END:VEVENT\n';
+            });
+
+            ical += 'END:VCALENDAR\n';
+            downloadFile(ical, 'planning.ics', 'text/calendar');
+        }
+
+        function downloadFile(content, filename, type) {
+            const blob = new Blob([content], { type: type });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function saveData() {
+            localStorage.setItem('planningTasks', JSON.stringify(tasks));
+            localStorage.setItem('planningTeams', JSON.stringify(teams));
+        }
+
+        function updateUI() {
+            updateTeamsSelects();
+            renderTeams();
+            renderWeek();
+        }
+
+        // Initialize
+        updateUI();
+    </script>
+</body>
+</html>
