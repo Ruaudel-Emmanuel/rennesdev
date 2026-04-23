@@ -11,6 +11,7 @@ This project is a lightweight HTML/CSS website focused on:
 ## Project Goal
 
 The website promotes freelance services around:
+- python automatisation 
 - API integrations,
 - workflow automation,
 - dashboards and operational tools,
