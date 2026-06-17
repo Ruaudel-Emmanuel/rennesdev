@@ -216,7 +216,7 @@
   <p class="hero-sub">Vous souhaitez gagner du temps et réduire les tâches répétitives dans votre activité ? Cette session de conseil est faite pour vous. En 1h, nous identifierons ensemble les opportunités d'automatisation adaptées à votre contexte.</p>
   <div class="cta-wrapper">
     <button id="btn-reserver-hero" class="btn-primary" onclick="reserverSession('btn-reserver-hero')">
-      Réservez votre session – 50 € HT
+      Réservez votre session – 149 € HT
     </button>
     <span class="cta-sub">Paiement sécurisé en ligne</span>
   </div>
@@ -236,7 +236,7 @@ async function reserverSession(btnId) {
     const data = await resp.json();
     window.location.href = data.checkout_url;
   } catch {
-    btn.textContent = 'Réservez votre session – 50 € HT';
+    btn.textContent = 'Réservez votre session – 149 € HT';
     btn.disabled = false;
     alert('Une erreur est survenue. Merci de réessayer ou de me contacter directement.');
   }
