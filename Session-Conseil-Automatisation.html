@@ -210,13 +210,37 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
-    <span class="hero-tag">Session Conseil Automatisation</span>
-    <h1>Identifiez ce que vous pouvez <span>automatiser</span> en 1h de visio</h1>
-    <p class="hero-sub">Vous souhaitez gagner du temps et réduire les tâches répétitives dans votre activité ? Cette session de conseil est faite pour vous. En 1h, nous identifierons ensemble les opportunités d'automatisation adaptées à votre contexte.</p>
-    <div class="cta-wrapper">
-      <button class="btn-primary" onclick="document.getElementById('reservation').scrollIntoView({ behavior: 'smooth' });">Réservez votre session – 50 € HT</button>
-      <span class="cta-sub">Paiement sécurisé en ligne</span>
-    </div>
+<section class="hero">
+  <span class="hero-tag">Session Conseil Automatisation</span>
+  <h1>Identifiez ce que vous pouvez <span>automatiser</span> en 1h de visio</h1>
+  <p class="hero-sub">Vous souhaitez gagner du temps et réduire les tâches répétitives dans votre activité ? Cette session de conseil est faite pour vous. En 1h, nous identifierons ensemble les opportunités d'automatisation adaptées à votre contexte.</p>
+  <div class="cta-wrapper">
+    <button id="btn-reserver-hero" class="btn-primary" onclick="reserverSession('btn-reserver-hero')">
+      Réservez votre session – 50 € HT
+    </button>
+    <span class="cta-sub">Paiement sécurisé en ligne</span>
+  </div>
+</section>
 
-  </section>
+<script>
+async function reserverSession(btnId) {
+  const btn = document.getElementById(btnId || 'btn-reserver-hero');
+  btn.textContent = 'Chargement…';
+  btn.disabled = true;
+  try {
+    const resp = await fetch('https://api.rennesdev.fr/api/v1/payments/session-conseil', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (!resp.ok) throw new Error();
+    const data = await resp.json();
+    window.location.href = data.checkout_url;
+  } catch {
+    btn.textContent = 'Réservez votre session – 50 € HT';
+    btn.disabled = false;
+    alert('Une erreur est survenue. Merci de réessayer ou de me contacter directement.');
+  }
+}
+</script>
+
+
