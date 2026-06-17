@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réservation confirmée – RennesDev</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1a1a1a; background: #fff; line-height: 1.6;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,20,0.92); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    .nav-brand { color: #fff; font-weight: 700; font-size: 1rem; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { color: rgba(255,255,255,0.75); font-size: 0.9rem; transition: color .2s; }
+    .nav-links a:hover { color: #fff; }
+
+    /* HERO CONFIRMATION */
+    .confirmation {
+      flex: 1;
+      padding: 130px 2rem 90px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #0f172a 100%);
+      text-align: center; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .confirmation-inner { max-width: 600px; margin: 0 auto; }
+
+    .checkmark {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(37,99,235,0.2);
+      border: 2px solid rgba(37,99,235,0.5);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 2rem;
+      font-size: 2rem;
+    }
+
+    .confirmation-tag {
+      display: inline-block;
+      background: rgba(37,99,235,0.25); border: 1px solid rgba(37,99,235,0.5);
+      color: #93c5fd; font-size: 0.8rem; font-weight: 700;
+      padding: 0.35rem 1rem; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.4rem;
+    }
+
+    .confirmation h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800; line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .confirmation h1 span { color: #60a5fa; }
+
+    .confirmation-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,0.72);
+      max-width: 500px; margin: 0 auto 3rem; line-height: 1.65;
+    }
+
+    /* ÉTAPES SUIVANTES */
+    .etapes {
+      padding: 5rem 2rem; background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+    }
+    .container { max-width: 680px; margin: 0 auto; }
+    .section-title { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 800; margin-bottom: 0.5rem; }
+    .section-sub { color: #64748b; font-size: 1rem; margin-bottom: 2.5rem; line-height: 1.6; }
+
+    .etapes-list {
+      display: flex; flex-direction: column; gap: 0;
+      margin-top: 2rem; position: relative;
+    }
+    .etapes-list::before {
+      content: ''; position: absolute;
+      left: 28px; top: 14px; bottom: 14px;
+      width: 2px; background: #dbeafe;
+    }
+    .etape {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      padding: 0 0 2.2rem 0; position: relative;
+    }
+    .etape:last-child { padding-bottom: 0; }
+    .etape-dot { flex-shrink: 0; width: 58px; text-align: center; }
+    .etape-dot .dot {
+      width: 16px; height: 16px; background: #2563eb; border-radius: 50%;
+      box-shadow: 0 0 0 5px #dbeafe; margin: 0 auto 0.4rem;
+    }
+    .etape-dot .num {
+      font-size: 0.7rem; font-weight: 700; color: #2563eb;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .etape-content h3 { font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.3rem; }
+    .etape-content p { font-size: 0.9rem; color: #475569; line-height: 1.6; }
+
+    /* INFO CARD */
+    .info-section { padding: 5rem 2rem; background: #fff; }
+    .info-card {
+      background: #f8fafc; border: 1px solid #e2e8f0;
+      border-radius: 16px; padding: 2rem;
+      max-width: 680px; margin: 0 auto;
+      display: flex; gap: 1.5rem; align-items: flex-start;
+    }
+    .info-icon {
+      flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px;
+      background: #dbeafe; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .info-card h3 { font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.4rem; }
+    .info-card p { font-size: 0.9rem; color: #475569; line-height: 1.6; }
+    .info-card a { color: #2563eb; font-weight: 600; }
+    .info-card a:hover { text-decoration: underline; }
+
+    /* CTA RETOUR */
+    .retour-section {
+      background: linear-gradient(135deg, #1e3a5f, #0f172a);
+      padding: 4rem 2rem; text-align: center; color: #fff;
+    }
+    .retour-section h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.6rem; }
+    .retour-sub { color: rgba(255,255,255,0.65); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6; }
+    .btn-primary {
+      display: inline-block; background: #2563eb; color: #fff;
+      font-weight: 700; padding: 0.9rem 2.2rem; border-radius: 30px;
+      font-size: 1rem; transition: background .2s, transform .15s;
+      cursor: pointer; border: none; font-family: inherit;
+    }
+    .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-block; background: transparent; color: #fff;
+      font-weight: 600; padding: 0.85rem 2rem; border-radius: 30px;
+      font-size: 1rem; transition: background .2s;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      margin-left: 1rem;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.08); }
+    .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer {
+      background: #0f172a; color: rgba(255,255,255,0.4);
+      text-align: center; padding: 1.5rem; font-size: 0.82rem;
+    }
+    footer a { color: rgba(255,255,255,0.6); }
+    footer a:hover { color: #fff; }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { height: auto; padding: 0.75rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
+      .nav-links { gap: 0.75rem; }
+      .info-card { flex-direction: column; }
+      .btn-outline { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-brand">RennesDev</a>
+    <div class="nav-links">
+      <a href="/">Accueil</a>
+      <a href="/#portfolio">Portfolio</a>
+      <a href="/#tarifs">Tarifs</a>
+      <a href="https://www.malt.fr/profile/emmanuelruaudel" target="_blank">Malt</a>
+    </div>
+  </nav>
+
+  <!-- CONFIRMATION HERO -->
+  <section class="confirmation">
+    <div class="confirmation-inner">
+      <div class="checkmark">✓</div>
+      <div class="confirmation-tag">Paiement confirmé</div>
+      <h1>C'est tout bon.<br><span>Votre session est réservée.</span></h1>
+      <p class="confirmation-sub">
+        Vous allez recevoir un email de confirmation avec tous les détails.
+        Je vous contacte sous 24h pour fixer le créneau qui vous convient.
+      </p>
+    </div>
+  </section>
+
+  <!-- ÉTAPES SUIVANTES -->
+  <section class="etapes">
+    <div class="container">
+      <h2 class="section-title">La suite, concrètement</h2>
+      <p class="section-sub">Voici ce qui se passe maintenant.</p>
+      <div class="etapes-list">
+
+        <div class="etape">
+          <div class="etape-dot">
+            <div class="dot"></div>
+            <div class="num">Étape 1</div>
+          </div>
+          <div class="etape-content">
+            <h3>Email de confirmation</h3>
+            <p>Vous recevez un email avec le récapitulatif de votre paiement et la facture HT. Vérifiez vos spams si vous ne le recevez pas dans les 5 minutes.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div class="etape-dot">
+            <div class="dot"></div>
+            <div class="num">Étape 2</div>
+          </div>
+          <div class="etape-content">
+            <h3>Prise de contact sous 24h</h3>
+            <p>Je vous envoie un lien Calendly pour choisir le créneau qui vous convient le mieux — en semaine, en journée.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div class="etape-dot">
+            <div class="dot"></div>
+            <div class="num">Étape 3</div>
+          </div>
+          <div class="etape-content">
+            <h3>La session en visio — 1h</h3>
+            <p>On se retrouve sur Google Meet ou Zoom. Pas de jargon, pas de slide. On parle de votre quotidien et on identifie ensemble ce que vous pouvez automatiser.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div class="etape-dot">
+            <div class="dot"></div>
+            <div class="num">Étape 4</div>
+          </div>
+          <div class="etape-content">
+            <h3>Compte-rendu sous 48h</h3>
+            <p>Vous recevez un document clair avec les automatisations identifiées, les outils recommandés et les priorités. Actionnable immédiatement.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO CARD -->
+  <section class="info-section">
+    <div class="info-card">
+      <div class="info-icon">📧</div>
+      <div>
+        <h3>Une question avant la session ?</h3>
+        <p>
+          Vous pouvez me contacter directement par email :
+          <a href="mailto:ruaudel.emmanuel@orange.fr">ruaudel.emmanuel@orange.fr</a><br>
+          Je réponds sous 24h en jours ouvrés.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA RETOUR -->
+  <section class="retour-section">
+    <h2>En attendant notre session</h2>
+    <p class="retour-sub">Jetez un œil à quelques projets d'automatisation déjà réalisés.</p>
+    <div class="btn-group">
+      <a href="/#portfolio" class="btn-primary">Voir le portfolio</a>
+      <a href="/" class="btn-outline">Retour à l'accueil</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 RennesDev · <a href="/">rennesdev.fr</a></p>
+  </footer>
+
+  <!-- Nettoyage de l'URL (retire ?session_id=... après chargement) -->
+  <script>
+    if (window.history && window.history.replaceState) {
+      const url = window.location.pathname;
+      window.history.replaceState({}, document.title, url);
+    }
+  </script>
+
+</body>
+</html>

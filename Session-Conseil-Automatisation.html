@@ -10,17 +10,14 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      color: #1a1a1a;
-      background: #fff;
-      line-height: 1.6;
+      color: #1a1a1a; background: #fff; line-height: 1.6;
     }
     a { color: inherit; text-decoration: none; }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(10,10,20,0.92);
-      backdrop-filter: blur(8px);
+      background: rgba(10,10,20,0.92); backdrop-filter: blur(8px);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 2rem; height: 60px;
     }
@@ -29,104 +26,76 @@
     .nav-links a { color: rgba(255,255,255,0.75); font-size: 0.9rem; transition: color .2s; }
     .nav-links a:hover { color: #fff; }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       padding: 130px 2rem 90px;
       background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #0f172a 100%);
-      text-align: center;
-      color: #fff;
+      text-align: center; color: #fff;
     }
     .hero-tag {
       display: inline-block;
-      background: rgba(37,99,235,0.25);
-      border: 1px solid rgba(37,99,235,0.5);
-      color: #93c5fd;
-      font-size: 0.8rem; font-weight: 700;
-      padding: 0.35rem 1rem;
-      border-radius: 20px;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      margin-bottom: 1.4rem;
+      background: rgba(37,99,235,0.25); border: 1px solid rgba(37,99,235,0.5);
+      color: #93c5fd; font-size: 0.8rem; font-weight: 700;
+      padding: 0.35rem 1rem; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.4rem;
     }
     .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800; line-height: 1.18;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.18;
       max-width: 720px; margin: 0 auto 1.2rem;
     }
     .hero h1 span { color: #60a5fa; }
     .hero-sub {
       font-size: 1.05rem; color: rgba(255,255,255,0.72);
-      max-width: 560px; margin: 0 auto 2.5rem;
-      line-height: 1.65;
+      max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.65;
     }
     .btn-primary {
-      display: inline-block;
-      background: #2563eb; color: #fff;
-      font-weight: 700; padding: 0.9rem 2.2rem;
-      border-radius: 30px; font-size: 1rem;
-      transition: background .2s, transform .15s;
+      display: inline-block; background: #2563eb; color: #fff;
+      font-weight: 700; padding: 0.9rem 2.2rem; border-radius: 30px;
+      font-size: 1rem; transition: background .2s, transform .15s;
       cursor: pointer; border: none; font-family: inherit;
     }
     .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); }
     .btn-primary:disabled { background: #475569; cursor: not-allowed; transform: none; }
-    .cta-sub {
-      display: block; margin-top: 0.7rem;
-      font-size: 0.78rem; color: rgba(255,255,255,0.4);
-    }
+    .cta-sub { display: block; margin-top: 0.7rem; font-size: 0.78rem; color: rgba(255,255,255,0.4); }
 
-    /* ── POUR QUI ── */
+    /* POUR QUI */
     .pour-qui {
       background: #f8fafc; padding: 5rem 2rem;
-      border-top: 1px solid #e2e8f0;
-      border-bottom: 1px solid #e2e8f0;
+      border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;
     }
     .container { max-width: 900px; margin: 0 auto; }
-    .section-title {
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 800; margin-bottom: 0.5rem;
-    }
-    .section-sub {
-      color: #64748b; font-size: 1rem;
-      margin-bottom: 2.5rem; max-width: 580px; line-height: 1.6;
-    }
+    .section-title { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; margin-bottom: 0.5rem; }
+    .section-sub { color: #64748b; font-size: 1rem; margin-bottom: 2.5rem; max-width: 580px; line-height: 1.6; }
     .section-center { text-align: center; }
     .section-center .section-sub { margin-left: auto; margin-right: auto; }
     .checklist {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 1rem; margin-top: 0.5rem;
     }
     .checklist-item {
       display: flex; align-items: flex-start; gap: 0.8rem;
-      background: #fff; border: 1px solid #e2e8f0;
-      border-radius: 10px; padding: 1rem 1.2rem;
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.2rem;
     }
     .check-icon {
-      flex-shrink: 0; width: 22px; height: 22px;
-      background: #dbeafe; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: #2563eb; font-size: 0.72rem; font-weight: 800;
-      margin-top: 0.15rem;
+      flex-shrink: 0; width: 22px; height: 22px; background: #dbeafe;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: #2563eb; font-size: 0.72rem; font-weight: 800; margin-top: 0.15rem;
     }
     .checklist-item p { font-size: 0.92rem; color: #374151; line-height: 1.55; }
 
-    /* ── PROBLÈME ── */
-    .probleme {
-      padding: 5rem 2rem;
-      background: #fff;
-    }
+    /* PROBLÈME */
+    .probleme { padding: 5rem 2rem; background: #fff; }
     .probleme .container { max-width: 680px; }
     .probleme-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
     .probleme-item {
       display: flex; gap: 1rem; align-items: flex-start;
-      padding: 1rem 1.2rem;
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      border-radius: 10px;
+      padding: 1rem 1.2rem; background: #fef2f2;
+      border: 1px solid #fecaca; border-radius: 10px;
     }
     .probleme-icon { font-size: 1.1rem; margin-top: 0.1rem; flex-shrink: 0; }
     .probleme-item p { font-size: 0.92rem; color: #374151; line-height: 1.55; }
 
-    /* ── DÉROULEMENT ── */
+    /* DÉROULEMENT */
     .deroulement { padding: 5rem 2rem; background: #f8fafc; }
     .deroulement .container { max-width: 680px; }
     .session-steps {
@@ -135,58 +104,43 @@
     }
     .session-steps::before {
       content: ''; position: absolute;
-      left: 28px; top: 14px; bottom: 14px;
-      width: 2px; background: #dbeafe;
+      left: 28px; top: 14px; bottom: 14px; width: 2px; background: #dbeafe;
     }
-    .step {
-      display: flex; gap: 1.5rem; align-items: flex-start;
-      padding: 0 0 2.5rem 0; position: relative;
-    }
+    .step { display: flex; gap: 1.5rem; align-items: flex-start; padding: 0 0 2.5rem 0; position: relative; }
     .step:last-child { padding-bottom: 0; }
     .step-dot { flex-shrink: 0; width: 58px; text-align: center; }
     .step-dot .dot {
-      width: 16px; height: 16px;
-      background: #2563eb; border-radius: 50%;
-      box-shadow: 0 0 0 5px #dbeafe;
-      margin: 0 auto 0.4rem;
+      width: 16px; height: 16px; background: #2563eb; border-radius: 50%;
+      box-shadow: 0 0 0 5px #dbeafe; margin: 0 auto 0.4rem;
     }
-    .step-dot .time {
-      font-size: 0.7rem; font-weight: 700;
-      color: #2563eb; text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
+    .step-dot .time { font-size: 0.7rem; font-weight: 700; color: #2563eb; text-transform: uppercase; letter-spacing: 0.05em; }
     .step-content h3 { font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.3rem; }
     .step-content p { font-size: 0.9rem; color: #475569; line-height: 1.6; }
 
-    /* ── LIVRABLES ── */
+    /* LIVRABLES */
     .livrables { background: #0f172a; padding: 5rem 2rem; color: #fff; }
     .livrables .section-title { color: #fff; }
     .livrables .section-sub { color: rgba(255,255,255,0.6); }
     .livrable-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 1.2rem; margin-top: 2.5rem;
     }
     .livrable-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px; padding: 1.4rem;
-      display: flex; flex-direction: column; gap: 0.5rem;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 1.4rem; display: flex; flex-direction: column; gap: 0.5rem;
     }
     .li-icon { font-size: 1.4rem; line-height: 1; }
     .livrable-card h4 { font-size: 0.95rem; font-weight: 700; color: #f1f5f9; }
     .livrable-card p { font-size: 0.84rem; color: rgba(255,255,255,0.55); line-height: 1.55; }
 
-    /* ── PRIX ── */
+    /* PRIX */
     .prix-section {
       padding: 5rem 2rem; background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
-      text-align: center;
+      border-top: 1px solid #e2e8f0; text-align: center;
     }
     .prix-card {
-      background: #fff; border: 1.5px solid #dbeafe;
-      border-radius: 16px; padding: 2.5rem 2rem;
-      margin-top: 2.5rem;
+      background: #fff; border: 1.5px solid #dbeafe; border-radius: 16px;
+      padding: 2.5rem 2rem; margin-top: 2.5rem;
       box-shadow: 0 4px 20px rgba(37,99,235,0.08);
       max-width: 540px; margin-left: auto; margin-right: auto;
     }
@@ -195,16 +149,12 @@
     .prix-desc { font-size: 0.92rem; color: #475569; line-height: 1.7; max-width: 420px; margin: 0 auto 1.5rem; text-align: left; }
     .prix-garanties {
       display: flex; justify-content: center; gap: 1.5rem;
-      flex-wrap: wrap; margin-top: 1.5rem;
-      padding-top: 1.5rem; border-top: 1px solid #f1f5f9;
+      flex-wrap: wrap; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #f1f5f9;
     }
-    .prix-garantie {
-      font-size: 0.8rem; color: #64748b;
-      display: flex; align-items: center; gap: 0.3rem;
-    }
+    .prix-garantie { font-size: 0.8rem; color: #64748b; display: flex; align-items: center; gap: 0.3rem; }
     .prix-garantie b { color: #2563eb; }
 
-    /* ── À PROPOS ── */
+    /* À PROPOS */
     .apropos { padding: 5rem 2rem; background: #fff; }
     .apropos .container { max-width: 660px; display: flex; gap: 2rem; align-items: flex-start; }
     .apropos-avatar {
@@ -217,37 +167,56 @@
     .apropos-text .role { font-size: 0.83rem; color: #2563eb; font-weight: 600; margin-bottom: 0.7rem; }
     .apropos-text p { font-size: 0.9rem; color: #475569; line-height: 1.65; }
     .apropos-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
-    .apropos-tag {
-      background: #f1f5f9; color: #475569;
-      font-size: 0.75rem; font-weight: 600;
-      padding: 0.2rem 0.65rem; border-radius: 8px;
-    }
+    .apropos-tag { background: #f1f5f9; color: #475569; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.65rem; border-radius: 8px; }
 
-    /* ── RÉSERVATION ── */
+    /* RÉSERVATION */
     .reservation-section {
       background: linear-gradient(135deg, #1e3a5f, #0f172a);
       padding: 5rem 2rem; text-align: center; color: #fff;
       scroll-margin-top: 60px;
     }
     .reservation-section .container { max-width: 480px; }
-    .reservation-section h2 {
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 800; margin-bottom: 0.6rem;
-    }
+    .reservation-section h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 0.6rem; }
     .res-sub { color: rgba(255,255,255,0.65); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6; }
-    .booking-form {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 16px; padding: 2rem; text-align: left;
+    .cta-wrapper { text-align: center; }
+    .cta-note { font-size: 0.77rem; color: rgba(255,255,255,0.35); margin-top: 1rem; }
+
+    /* FOOTER */
+    footer { background: #0f172a; color: rgba(255,255,255,0.4); text-align: center; padding: 1.5rem; font-size: 0.82rem; }
+    footer a { color: rgba(255,255,255,0.6); }
+    footer a:hover { color: #fff; }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { height: auto; padding: 0.75rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
+      .nav-links { gap: 0.75rem; }
+      .hero { padding-top: 150px; }
+      .apropos .container { flex-direction: column; }
+      .checklist { grid-template-columns: 1fr; }
     }
-    .form-group { margin-bottom: 1rem; }
-    .form-group label {
-      display: block; font-size: 0.82rem; font-weight: 600;
-      color: rgba(255,255,255,0.75); margin-bottom: 0.4rem;
-      letter-spacing: 0.02em;
-    }
-    .form-group input {
-      width: 100%; background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 8px; padding: 0.7rem 1rem;
-      color: #fff; font-
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-brand">RennesDev</a>
+    <div class="nav-links">
+      <a href="/">Accueil</a>
+      <a href="/#portfolio">Portfolio</a>
+      <a href="/#tarifs">Tarifs</a>
+      <a href="https://www.malt.fr/profile/emmanuelruaudel" target="_blank">Malt</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-tag">Session Conseil Automatisation</span>
+    <h1>Identifiez ce que vous pouvez <span>automatiser</span> en 1h de visio</h1>
+    <p class="hero-sub">Vous souhaitez gagner du temps et réduire les tâches répétitives dans votre activité ? Cette session de conseil est faite pour vous. En 1h, nous identifierons ensemble les opportunités d'automatisation adaptées à votre contexte.</p>
+    <div class="cta-wrapper">
+      <button class="btn-primary" onclick="document.getElementById('reservation').scrollIntoView({ behavior: 'smooth' });">Réservez votre session – 50 € HT</button>
+      <span class="cta-sub">Paiement sécurisé en ligne</span>
+    </div>
+
+  </section>
