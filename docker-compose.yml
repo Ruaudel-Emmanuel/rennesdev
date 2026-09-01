@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  # =========================================================
+  # 1. SERVICE DE LA BASE DE DONNÉES (POSTGRES)
+  # =========================================================
+  postgres:
+    image: postgres:16-alpine # Image légère et fiable
+    container_name: postgres_db
+    restart: always
+    environment:
+      # --- INFORMATIONS DE L'UTILISATEUR CRÉÉ ---
+      - POSTGRES_USER=n8n_user 
+      - POSTGRES_PASSWORD=votre_mot_de_passe_secret
+      - POSTGRES_DB=n8n_db
+    volumes:
+      # Ceci est votre répertoire dédié et sécurisé pour les données
+      - postgres_data:/var/lib/postgresql/data
+    # Nous n'exposons pas le port 5432 à l'extérieur du VPS, 
+    # car n8n doit y accéder en interne via le réseau Docker.
+
+  # =========================================================
+  # 2. SERVICE N8N
+  # =========================================================
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n_workflow
+    restart: always
+    environment:
+      # --- CONFIGURATION DE LA BASE DE DONNÉES ---
+      # Le nom 'postgres' doit correspondre au nom du service ci-dessus
+      - DB_TYPE=postgres
+      - DB_POSTGRES_HOST=postgres 
+      - DB_POSTGRES_PORT=5432
+      - DB_POSTGRES_USER=n8n_user
+      - DB_POSTGRES_PASSWORD=votre_mot_de_passe_secret
+      - DB_POSTGRES_DATABASE=n8n_db
+      
+      # --- CONFIGURATION WEB ET ADRESSE ---
+      - WEBHOOK_URL=https://n8n.rennesdev.fr
+      - N8N_HOST=n8n.rennesdev.fr
+      - NODE_ENV=production
+    volumes:
+      - n8n_data:/home/n8n/.n8n
+    # Exposer les ports de Nginx vers l'extérieur (si c'est Nginx qui est le Reverse Proxy)
+    # Si Nginx est le proxy, N8N n'a pas besoin de ports exposés ici.
+    # Ports:
+      # - "5678:5678" 
+
+# =========================================================
+# 3. DÉFINITION DES VOLUMES DE PERSISTANCE
+# =========================================================
+volumes:
+  postgres_data: # <--- CLÉ : Le stockage des données PostgreSQL
+  n8n_data:      # <--- CLÉ : Le stockage des données n8n
