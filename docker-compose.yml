@@ -1,22 +1,20 @@
 version: '3.8'
+
 services:
   # =========================================================
   # 1. SERVICE DE LA BASE DE DONNÉES (POSTGRES)
   # =========================================================
   postgres:
-    image: postgres:16-alpine # Image légère et fiable
+    image: postgres:16-alpine
     container_name: postgres_db
     restart: always
     environment:
       # --- INFORMATIONS DE L'UTILISATEUR CRÉÉ ---
-      - POSTGRES_USER=n8n_user 
+      - POSTGRES_USER=n8n_user
       - POSTGRES_PASSWORD=votre_mot_de_passe_secret
       - POSTGRES_DB=n8n_db
     volumes:
-      # Ceci est votre répertoire dédié et sécurisé pour les données
       - postgres_data:/var/lib/postgresql/data
-    # Nous n'exposons pas le port 5432 à l'extérieur du VPS, 
-    # car n8n doit y accéder en interne via le réseau Docker.
 
   # =========================================================
   # 2. SERVICE N8N
@@ -25,11 +23,20 @@ services:
     image: n8nio/n8n
     container_name: n8n_workflow
     restart: always
+    ports:
+      - "5679:5678" # 👈 On continue d'utiliser le contournement de port
     environment:
+      # ==================================================================
+      # ** PLACEZ ICI TOUTES LES VARIABLES DU .env (Déjà listées) **
+      N8N_ENABLED_MODULES: instance-ai
+      N8N_INSTANCE_AI_MODEL: ${N8N_INSTANCE_AI_MODEL}
+      N8N_INSTANCE_AI_MODEL_API_KEY: ${N8N_INSTANCE_AI_MODEL_API_KEY}
+      N8N_INSTANCE_AI_SANDBOX_ENABLED: ${N8N_INSTANCE_AI_SANDBOX_ENABLED}
+      N8N_INSTANCE_AI_SANDBOX_PROVIDER: ${N8N_INSTANCE_AI_SANDBOX_PROVIDER}
+      
       # --- CONFIGURATION DE LA BASE DE DONNÉES ---
-      # Le nom 'postgres' doit correspondre au nom du service ci-dessus
-      - DB_TYPE=postgres
-      - DB_POSTGRES_HOST=postgres 
+      - DB_TYPE=postgresdb
+      - DB_POSTGRES_HOST=postgres
       - DB_POSTGRES_PORT=5432
       - DB_POSTGRES_USER=n8n_user
       - DB_POSTGRES_PASSWORD=votre_mot_de_passe_secret
@@ -41,14 +48,61 @@ services:
       - NODE_ENV=production
     volumes:
       - n8n_data:/home/n8n/.n8n
-    # Exposer les ports de Nginx vers l'extérieur (si c'est Nginx qui est le Reverse Proxy)
-    # Si Nginx est le proxy, N8N n'a pas besoin de ports exposés ici.
-    # Ports:
-      # - "5678:5678" 
 
 # =========================================================
-# 3. DÉFINITION DES VOLUMES DE PERSISTANCE
+# 3. SERVICES DE L'ASSISTANT IA (THE SANDBOX PILE)
+# =========================================================
+# --- 3A. Certificats ---
+sandbox-certs:
+    image: ghcr.io/n8nio/n8n-sandbox-service-certs:latest
+    user: '0:0'
+    entrypoint: ['sh', '-c']
+    command: >
+      bootstrap-mtls.sh --out-dir /tls --api-san sandbox-api --control-san sandbox-runner
+    environment:
+      NUM_RUNNERS: '1'
+    volumes:
+      - sandbox-tls:/tls
+
+# --- 3B. API Sandbox (Le contrôleur de l'IA) ---
+sandbox-api:
+    image: ghcr.io/n8nio/n8n-sandbox-service-api:latest
+    depends_on:
+      - sandbox-certs
+    environment:
+      SANDBOX_API_KEYS: ${SANDBOX_API_KEYS}
+      SANDBOX_API_RUNNER_REGISTRATION_TOKEN: ${SANDBOX_API_RUNNER_REGISTRATION_TOKEN}
+      SANDBOX_API_RUNNER_API_KEY: ${SANDBOX_API_RUNNER_API_KEY}
+    volumes:
+      - sandbox-tls:/tls
+
+# --- 3C. Sandbox Runner (Le moteur d'exécution de code) ---
+sandbox-runner-1:
+    image: ghcr.io/n8nio/n8n-sandbox-service-runner-dind:latest
+    privileged: true # Nécessaire pour l'exécution de code Docker-in-Docker
+    depends_on:
+      - sandbox-api
+    environment:
+      SANDBOX_RUNNER_API_KEYS: ${SANDBOX_API_RUNNER_API_KEY}
+      SANDBOX_RUNNER_REGISTRATION_TOKEN: ${SANDBOX_API_RUNNER_REGISTRATION_TOKEN}
+      SANDBOX_RUNNER_API_GRPC_ADDR: sandbox-api:9090
+      SANDBOX_RUNNER_HTTP_BASE_URL: http://sandbox-runner-1:8080
+      # ... (toutes les autres variables de secrets de runner)
+    volumes:
+      - sandbox-tls:/tls
+
+# --- 3D. Recherche Web (SearxNG) ---
+searxng:
+    image: ghcr.io/searxng/searxng:latest
+    environment:
+      SEARXNG_SECRET: ${SEARXNG_SECRET}
+    volumes:
+      - ./searxng-settings.yml:/etc/searxng/settings.yml:ro
+
+# =========================================================
+# 4. DÉFINITION DES VOLUMES DE PERSISTANCE
 # =========================================================
 volumes:
-  postgres_data: # <--- CLÉ : Le stockage des données PostgreSQL
-  n8n_data:      # <--- CLÉ : Le stockage des données n8n
+  postgres_data:
+  n8n_data:
+  sandbox-tls: # Volume pour les certificats TLS
