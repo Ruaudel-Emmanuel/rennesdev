@@ -3,16 +3,199 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Portfolio – Emmanuel Ruaudel · Automatisation IA & API</title>
+  <meta
+    name="description"
+    content="Portfolio de projets en automatisation, API, IA, reporting et VBA : des cas concrets avec gains de temps, baisse des erreurs et résultats mesurables. 15 ans d'expérience terrain + infrastructure IA souveraine."
+  />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://rennesdev.fr/portofolio.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Portfolio – Emmanuel Ruaudel · Automatisation IA & API" />
+  <meta
+    property="og:description"
+    content="Des cas concrets en automatisation, API, IA, reporting et VBA avec résultats mesurables."
+  />
+  <meta property="og:url" content="https://rennesdev.fr/portofolio.html" />
+  <meta property="og:site_name" content="RennesDev" />
+  <meta property="og:image" content="https://rennesdev.fr/banniere-codeur.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Portfolio – Emmanuel Ruaudel · Automatisation IA & API" />
+  <meta
+    name="twitter:description"
+    content="Cas clients concrets en automatisation, API, IA, reporting et VBA."
+  />
+  <meta name="twitter:image" content="https://rennesdev.fr/banniere-codeur.jpg" />
 
   <!-- CSS -->
   <link rel="stylesheet" href="./style.css">
 
   <script async src="https://tally.so/widgets/embed.js"></script>
 
-</head>
-<body>
+  <!-- Styles complémentaires pour les nouveaux blocs (n'écrase pas style.css) -->
+  <style>
+    /* Correction bug d'encodage des puces de liste (mojibake "âce"") */
+    .card-results {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .card-results li {
+      position: relative;
+      padding-left: 1.3rem;
+      margin-bottom: .5rem;
+      line-height: 1.5;
+    }
+    .card-results li::before {
+      content: "\2022"; /* puce échappée en Unicode, indépendante de l'encodage du fichier */
+      color: #3355dd;
+      font-weight: 700;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
 
+    .illustration-block {
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
+    .illustration-block img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+      display: block;
+    }
+    .illustration-caption {
+      text-align: center;
+      font-size: .9rem;
+      opacity: .7;
+      margin-top: .6rem;
+    }
+    .hero-flex {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .hero-flex > div:first-child { flex: 1 1 380px; }
+    .hero-flex > .hero-img { flex: 1 1 380px; }
+    .hero-img img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.12);
+    }
+    .dual-illustration {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
+    .dual-illustration img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+    }
+    @media (max-width: 768px) {
+      .dual-illustration { grid-template-columns: 1fr; }
+      .hero-flex { flex-direction: column; }
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      max-width: 1100px;
+      margin: 2rem auto 0;
+      padding: 0 1rem;
+    }
+    .tech-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+    }
+    .tech-card h4 {
+      margin: 0 0 .6rem;
+      font-size: .95rem;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      opacity: .6;
+    }
+    .tech-card p {
+      margin: 0;
+      font-size: .95rem;
+      line-height: 1.5;
+    }
+
+    .oss-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      padding: 0 1rem;
+    }
+    .oss-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+    .oss-card h3 { margin: 0; font-size: 1.05rem; }
+    .oss-card p { margin: 0; font-size: .92rem; opacity: .85; line-height: 1.5; }
+    .oss-card a {
+      margin-top: auto;
+      font-size: .88rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .oss-badge {
+      display: inline-block;
+      font-size: .72rem;
+      padding: .2rem .55rem;
+      border-radius: 6px;
+      background: #f0f4ff;
+      color: #3355dd;
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    .infra-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 2rem auto 0;
+      padding: 0 1rem;
+    }
+    .infra-stat {
+      text-align: center;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 1.2rem .8rem;
+    }
+    .infra-stat .num { font-size: 1.6rem; font-weight: 700; }
+    .infra-stat .lbl { font-size: .82rem; opacity: .7; margin-top: .3rem; }
+  </style>
+</head>
+
+<body>
 
 <nav>
   <div class="nav .container">
@@ -20,25 +203,31 @@
       <a href="index.html">Index</a>
       <a href="tarifs.html">Tarifs</a>
       <a href="appli.html">Outils gratuits</a>
+      <a href="https://github.com/Ruaudel-Emmanuel" target="_blank">GitHub</a>
       <a href="https://www.malt.fr/profile/emmanuelruaudel" target="_blank">Malt</a>
       <a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362/" target="_blank">Linkedin</a>
-      </div>
+    </div>
   </div>
 </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <div><h2 class="section-title">Ce que mes clients ont <span>gagné</span> grâce à l'automatisation</h2>
-
-      <p class="section-sub">Des projets concrets, juste du temps et de l'argent économisés.
-
-      </p>
+    <div class="hero-flex">
+      <div>
+        <h2 class="section-title">Ce que mes clients ont <span>gagné</span> grâce à l'automatisation</h2>
+        <p class="section-sub">
+          15 ans à concevoir des outils métiers fiables (secteur public, PME), puis fondateur de Rennesdev :
+          j'aide aujourd'hui les dirigeants de TPE/PME à automatiser leurs opérations avec n8n, Python et l'IA locale —
+          sans dépendre d'un cloud tiers pour les données sensibles.
+        </p>
+      </div>
+      <div class="hero-img">
+        <img src="illustration-n8n-avant-apres.png" alt="Avant : bureau débordé de mails et papiers. Après : workflow automatisé avec n8n, tâches et notifications gérées automatiquement." loading="lazy">
+      </div>
     </div>
   </section>
 
-
   <!-- STATS BAND -->
-
   <section class="stats-band">
     <div class="stats-inner">
       <div class="stat-item">
@@ -62,6 +251,19 @@
         <div class="label">récupérées en moyenne par client</div>
       </div>
     </div>
+  </section>
+
+  <!-- ILLUSTRATION AVANT/APRÈS DOUBLE -->
+  <section class="section">
+    <div class="dual-illustration">
+      <div>
+        <img src="illustration-taches-avant-apres.png" alt="Avant : bureau surchargé de post-it et documents. Après : tableau de bord clair, 20h économisées par semaine." loading="lazy">
+      </div>
+      <div>
+        <img src="illustration-reporting-avant-apres.png" alt="Avant : reporting manuel à haut risque d'erreur, 3 à 6h par semaine. Après : script Python automatisé, -70% d'erreurs, -90% de temps de reporting." loading="lazy">
+      </div>
+    </div>
+    <p class="illustration-caption">Le principe est toujours le même : je pars de votre process actuel (chronophage, source d'erreurs) et je le remplace par un flux automatisé, mesurable.</p>
   </section>
 
   <!-- CAS CLIENTS -->
@@ -98,11 +300,11 @@
             perte de données en cas d'interruption.
           </p>
           <ul class="card-results">
-            >8h → moins de 25 min par lot de traitement</li>
-            >100 000 lignes traitées sans intervention manuelle</li>
-            >100 % des erreurs tracées et loguées automatiquement</li>
-            >Dashboard KPI temps réel (taux de succès, durée, volume)</li>
-            >Zéro perte de données grâce à la préservation des sources</li>
+            <li>8h → moins de 25 min par lot de traitement</li>
+            <li>100 000 lignes traitées sans intervention manuelle</li>
+            <li>100 % des erreurs tracées et loguées automatiquement</li>
+            <li>Dashboard KPI temps réel (taux de succès, durée, volume)</li>
+            <li>Zéro perte de données grâce à la préservation des sources</li>
           </ul>
           <div class="card-stack">N8N · Google Sheets API · REST API · Traitement batch asynchrone</div>
         </div>
@@ -121,11 +323,11 @@
             Risque d'oublis, de retards et d'expériences client dégradées.
           </p>
           <ul class="card-results">
-            >Inscription automatique + email de bienvenue instantané</li>
-            >Templates email responsifs générés dynamiquement</li>
-            >Webhooks Stripe/PayPal intégrés, livraison post-paiement automatisée</li>
-            >Gestion avancée des erreurs avec récupération intelligente</li>
-            >Flux d'authentification API sécurisé</li>
+            <li>Inscription automatique + email de bienvenue instantané</li>
+            <li>Templates email responsifs générés dynamiquement</li>
+            <li>Webhooks Stripe/PayPal intégrés, livraison post-paiement automatisée</li>
+            <li>Gestion avancée des erreurs avec récupération intelligente</li>
+            <li>Flux d'authentification API sécurisé</li>
           </ul>
           <div class="card-stack">Zapier · Python · Stripe · PayPal · Gmail API</div>
         </div>
@@ -144,15 +346,86 @@
             Des frictions invisibles qui coûtaient cher en temps et en concentration.
           </p>
           <ul class="card-results">
-            >−80 % d'erreurs de saisie</li>
-            >Délais de traitement divisés par 3 sur devis et factures</li>
-            >ROI atteint en moins de 2 mois</li>
-            >Relances clients automatisées, zéro oubli</li>
+            <li>−80 % d'erreurs de saisie</li>
+            <li>Délais de traitement divisés par 3 sur devis et factures</li>
+            <li>ROI atteint en moins de 2 mois</li>
+            <li>Relances clients automatisées, zéro oubli</li>
           </ul>
           <div class="card-stack">Python · Django · FastAPI · N8N · Make · Zapier</div>
         </div>
 
-        <!-- CAS 4 : Générateur de devis VBA – Ville de Rennes -->
+        <!-- CAS 4 : Architecture microservices souveraine -->
+        <div class="case-card" data-category="automation api scraping">
+          <div class="card-header">
+            <span class="card-tag tag-api">API & Intégrations</span>
+            <span class="card-icon">🔐</span>
+          </div>
+          <div class="card-metric">100 %</div>
+          <div class="card-metric-label">des données sensibles hébergées en local</div>
+          <h3>Architecture microservices souveraine – Rennesdev</h3>
+          <p class="context">
+            Besoin de découpler les services métier (API backend, workflows n8n, IA) sans dépendre
+            d'un cloud tiers pour les traitements sensibles de mes clients.
+          </p>
+          <ul class="card-results">
+            <li>Architecture 3 niveaux : API, workflows, IA locale</li>
+            <li>Jusqu'à 95 % de réduction du temps de traitement sur tâches répétitives</li>
+            <li>Délais de devis/factures divisés par 2 à 3</li>
+            <li>Réduction de plus de 80 % des erreurs de saisie manuelle</li>
+            <li>Documentée et transmissible, sans dépendance excessive à un prestataire</li>
+          </ul>
+          <div class="card-stack">Python (FastAPI) · n8n · Docker · Nginx · Cloudflare Tunnel · Odoo API · Ollama (LLM local) · PostgreSQL</div>
+        </div>
+
+        <!-- CAS 5 : Surveillance tarifaire -->
+        <div class="case-card" data-category="scraping automation">
+          <div class="card-header">
+            <span class="card-tag tag-automation">Scraping & Données</span>
+            <span class="card-icon">📈</span>
+          </div>
+          <div class="card-metric">3-4 h/sem</div>
+          <div class="card-metric-label">de veille manuelle économisées</div>
+          <h3>Surveillance tarifaire concurrentielle (Python / Streamlit)</h3>
+          <p class="context">
+            Relevés manuels des tarifs concurrents : chronophage, sujet à l'oubli,
+            aucune alerte en cas de changement de prix.
+          </p>
+          <ul class="card-results">
+            <li>Dashboard en ligne suivant automatiquement les tarifs concurrents</li>
+            <li>Alerte instantanée dès qu'un concurrent modifie ses prix</li>
+            <li>Fin des relevés manuels, historique conservé</li>
+          </ul>
+          <div class="card-stack">Python · Streamlit · Scraping planifié</div>
+          <div class="card-stack" style="margin-top:.4rem">
+            <a href="https://github.com/Ruaudel-Emmanuel/surveillance-tarifaire" target="_blank">→ Voir le repo GitHub</a>
+          </div>
+        </div>
+
+        <!-- CAS 6 : Chantier API -->
+        <div class="case-card" data-category="api automation">
+          <div class="card-header">
+            <span class="card-tag tag-api">API & Intégrations</span>
+            <span class="card-icon">🏗️</span>
+          </div>
+          <div class="card-metric">5 h/sem</div>
+          <div class="card-metric-label">gagnées par chef de chantier</div>
+          <h3>Chantier API – Pilotage de chantiers en temps réel</h3>
+          <p class="context">
+            Suivi de chantiers, équipes, sous-traitants et documents dispersés entre mails
+            et tableurs, avec un vrai risque de perte d'information.
+          </p>
+          <ul class="card-results">
+            <li>Plateforme centralisée de pilotage chantiers/équipes/sous-traitants</li>
+            <li>Documents et statuts accessibles en temps réel</li>
+            <li>Fin des mails et tableurs dispersés</li>
+          </ul>
+          <div class="card-stack">Django REST Framework · PostgreSQL</div>
+          <div class="card-stack" style="margin-top:.4rem">
+            <a href="https://github.com/Ruaudel-Emmanuel/chantier-api" target="_blank">→ Voir le repo GitHub</a>
+          </div>
+        </div>
+
+        <!-- CAS 7 : Générateur de devis VBA – Ville de Rennes -->
         <div class="case-card" data-category="vba reporting">
           <div class="card-header">
             <span class="card-tag tag-vba">VBA & Excel</span>
@@ -166,16 +439,16 @@
             manuellement depuis un bordereau de prix non centralisé.
           </p>
           <ul class="card-results">
-            >1h30 → 30 min par devis (−60 %)</li>
-            >40 à 60 heures économisées par an</li>
-            >Catalogue centralisé avec filtrage et sélection rapide</li>
-            >Calcul automatique des montants (RECHERCHEV + macros VBA)</li>
-            >Export propre, sans lignes vides, prêt à imprimer</li>
+            <li>1h30 → 30 min par devis (−60 %)</li>
+            <li>40 à 60 heures économisées par an</li>
+            <li>Catalogue centralisé avec filtrage et sélection rapide</li>
+            <li>Calcul automatique des montants (RECHERCHEV + macros VBA)</li>
+            <li>Export propre, sans lignes vides, prêt à imprimer</li>
           </ul>
           <div class="card-stack">VBA · Excel · Macros · Bordereau de prix structuré</div>
         </div>
 
-        <!-- CAS 5 : Générateur devis VBA 2010 – Mairie Rennes -->
+        <!-- CAS 8 : Générateur devis VBA 2010 – Mairie Rennes -->
         <div class="case-card" data-category="vba reporting">
           <div class="card-header">
             <span class="card-tag tag-vba">VBA & Excel</span>
@@ -190,42 +463,145 @@
             aucun filtre par famille de travaux.
           </p>
           <ul class="card-results">
-            >Masquage automatique des lignes vides à l'impression</li>
-            >Filtrage par famille (terrassement, plantations, réseaux…)</li>
-            >Interface de sélection : code, libellé, unité, quantité, prix HT</li>
-            >Adoption rapide par les équipes grâce à l'ergonomie soignée</li>
+            <li>Masquage automatique des lignes vides à l'impression</li>
+            <li>Filtrage par famille (terrassement, plantations, réseaux…)</li>
+            <li>Interface de sélection : code, libellé, unité, quantité, prix HT</li>
+            <li>Adoption rapide par les équipes grâce à l'ergonomie soignée</li>
           </ul>
           <div class="card-stack">VBA · Excel · Macros de filtrage · Export impression</div>
         </div>
 
-        <!-- CAS 6 : Génération rapports PDF automatisés -->
+        <!-- CAS 9 : Génération rapports PDF automatisés -->
         <div class="case-card" data-category="reporting automation">
           <div class="card-header">
             <span class="card-tag tag-reporting">Reporting & PDF</span>
             <span class="card-icon">📄</span>
           </div>
-          <div class="card-metric">÷3</div>
-          <div class="card-metric-label">sur les délais de génération de rapports</div>
-          <h3>Rapports PDF automatisés – Clients récurrents</h3>
+          <div class="card-metric">95 %</div>
+          <div class="card-metric-label">de temps en moins sur les livrables récurrents</div>
+          <h3>Agent IA PDF – Rapports automatisés depuis données brutes</h3>
           <p class="context">
-            Génération manuelle de rapports depuis des données Google Sheets : mise en forme longue,
-            risques d'erreurs de copier-coller, envoi oublié.
+            Génération manuelle de rapports depuis du JSON ou des données Google Sheets :
+            mise en forme longue (~1h par rapport), erreurs de copier-coller, envoi parfois oublié.
           </p>
           <ul class="card-results">
-            >Génération automatique depuis Google Sheets → PDF mis en page</li>
-            >Envoi automatisé par email à chaque destinataire</li>
-            >Templates personnalisables via Jinja2</li>
-            >Délais divisés par 3, zéro intervention manuelle</li>
+            <li>Rapport JSON → PDF professionnel généré en moins d'1 minute</li>
+            <li>Envoi automatisé par email à chaque destinataire</li>
+            <li>Templates personnalisables via Jinja2</li>
+            <li>Zéro intervention manuelle sur les livrables récurrents</li>
           </ul>
-          <div class="card-stack">Python · Jinja2 · WeasyPrint · Gmail API · Google Sheets</div>
+          <div class="card-stack">Python · Jinja2 · WeasyPrint · Gmail API</div>
+          <div class="card-stack" style="margin-top:.4rem">
+            <a href="https://github.com/Ruaudel-Emmanuel/IA-agent-PDF" target="_blank">→ Voir le repo GitHub</a>
+          </div>
         </div>
 
       </div><!-- /cards-grid -->
     </div>
   </section>
 
+  <!-- ILLUSTRATION SIMPLE -->
+  <section class="section section-alt">
+    <div class="illustration-block">
+      <img src="illustration-simple-avant-apres.png" alt="Avant : bureau chaotique avec dossiers et post-it. Après : bureau épuré avec un tableau de bord clair sur l'écran." loading="lazy">
+      <p class="illustration-caption">Objectif final, à chaque mission : moins de friction visuelle et mentale, plus de visibilité sur ce qui compte.</p>
+    </div>
+  </section>
+
+  <!-- PROJETS OPEN SOURCE / INFRASTRUCTURE -->
+  <section class="section" id="projets-oss">
+    <div class="container">
+      <h2 class="section-title">Projets open-source & infrastructure</h2>
+      <p class="section-sub">
+        La preuve par l'exemple : mon infrastructure et mes outils sont documentés, versionnés
+        et publics sur GitHub — la même rigueur que ce que je livre à mes clients.
+      </p>
+
+      <div class="oss-grid">
+        <div class="oss-card">
+          <span class="oss-badge">IA locale</span>
+          <h3>Nav.rennesdev</h3>
+          <p>Navigateur web « mode lecture » qui extrait le contenu des pages et l'analyse avec un modèle IA local (Ollama) — les données ne quittent jamais le serveur.</p>
+          <a href="https://github.com/Ruaudel-Emmanuel/Nav.rennesdev" target="_blank">→ Voir le repo</a>
+        </div>
+        <div class="oss-card">
+          <span class="oss-badge">Android</span>
+          <h3>Lecteur-PDF</h3>
+          <p>App Android 100 % hors ligne, PDF.js embarqué, zéro permission réseau ou stockage. Publiée sur le Play Store (test fermé).</p>
+          <a href="https://github.com/Ruaudel-Emmanuel/Lecteur-PDF" target="_blank">→ Voir le repo</a>
+        </div>
+        <div class="oss-card">
+          <span class="oss-badge">Android</span>
+          <h3>Suivi Interventions</h3>
+          <p>Suivi de chantier terrain : interventions, photos directes, export. CI GitHub Actions sur chaque build, publiée sur le Play Store.</p>
+          <a href="https://github.com/Ruaudel-Emmanuel/construction-site-tracker" target="_blank">→ Voir le repo</a>
+        </div>
+        <div class="oss-card">
+          <span class="oss-badge">Infra</span>
+          <h3>rennesdev-vps-ops</h3>
+          <p>Le cœur technique : 10 conteneurs Docker (n8n, PostgreSQL, Ollama…), sauvegardes chiffrées, watchdog qui ouvre/clôt ses propres issues GitHub.</p>
+          <a href="https://github.com/Ruaudel-Emmanuel/rennesdev-vps-ops" target="_blank">→ Voir le repo</a>
+        </div>
+      </div>
+
+      <div class="infra-stats">
+        <div class="infra-stat">
+          <div class="num">10</div>
+          <div class="lbl">conteneurs Docker supervisés</div>
+        </div>
+        <div class="infra-stat">
+          <div class="num">100 %</div>
+          <div class="lbl">CI obligatoire avant chaque merge</div>
+        </div>
+        <div class="infra-stat">
+          <div class="num">0 clic</div>
+          <div class="lbl">pour les mises à jour de dépendances</div>
+        </div>
+        <div class="infra-stat">
+          <div class="num">Auto</div>
+          <div class="lbl">journal d'infra commité chaque soir</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK TECHNIQUE -->
+  <section class="section section-alt" id="stack">
+    <div class="container">
+      <h2 class="section-title">Stack technique</h2>
+      <p class="section-sub">Le bon outil au bon endroit — API quand c'est pertinent, IA locale quand la donnée est sensible.</p>
+
+      <div class="tech-grid">
+        <div class="tech-card">
+          <h4>Langages & Web</h4>
+          <p>Python (FastAPI, Django), JavaScript, Node.js, HTML/CSS, VBA/Excel</p>
+        </div>
+        <div class="tech-card">
+          <h4>Automatisation & IA</h4>
+          <p>n8n, Make, Zapier, Ollama (LLM local), scripts Python sur mesure</p>
+        </div>
+        <div class="tech-card">
+          <h4>Données & Intégrations</h4>
+          <p>PostgreSQL, Odoo (API JSON-RPC), Airtable, Notion, Stripe, Google Sheets API</p>
+        </div>
+        <div class="tech-card">
+          <h4>Infra & DevOps</h4>
+          <p>Docker, Nginx, Cloudflare Tunnel, VPS Ubuntu/OVH, GitHub Actions, Caddy</p>
+        </div>
+        <div class="tech-card">
+          <h4>Mobile</h4>
+          <p>Capacitor, Android, publication Play Store</p>
+        </div>
+        <div class="tech-card">
+          <h4>Reporting</h4>
+          <p>Jinja2, WeasyPrint, génération PDF automatisée, dashboards Streamlit</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- TIMELINE EXPÉRIENCES -->
-  <section class="section section-alt" id="parcours">
+  <section class="section" id="parcours">
     <div class="container">
       <h2 class="section-title">Parcours & expériences clés</h2>
       <p class="section-sub">15 ans de terrain avant le code — je comprends les contraintes métier avant de coder la solution.</p>
@@ -234,30 +610,38 @@
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <div class="date">2025 – présent</div>
-            <h3>Développeur Full Stack – Automatisation parcours client</h3>
-            <p>Automatisation complète : inscription, email, paiement Stripe/PayPal, livraison de contenu, gestion d'erreurs. Stack Zapier + Python.</p>
-            <span class="timeline-badge">Parcours client 100 % automatisé</span>
+            <div class="date">Sept. 2025 – présent</div>
+            <h3>Consultant IA & Automatisation – Rennesdev (fondateur)</h3>
+            <p>Audit express, identification des cas d'usage à fort ROI, mise en production rapide : workflows n8n, intégrations API (CRM, Airtable, Notion, Stripe), scripts Python sur mesure. Architecture microservices souveraine pour héberger les traitements IA sensibles localement.</p>
+            <span class="timeline-badge">Traitement de leads/devis divisé par 3</span>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <div class="date">2025 – 2026</div>
-            <h3>Workflow N8N – Enrichissement données à grande échelle</h3>
-            <p>Traitement batch asynchrone de 100 000 lignes Google Sheets. Temps réduit de 8h à 25 min. Dashboard KPI temps réel.</p>
-            <span class="timeline-badge">−95 % temps de traitement</span>
+            <div class="date">Mars 2026 – mai 2026</div>
+            <h3>Formation n8n, les fondamentaux – CNAM</h3>
+            <p>Approfondissement des workflows d'automatisation avancés.</p>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <div class="date">2026</div>
-            <h3>Automatisation administrative – PME & indépendants</h3>
-            <p>Facturation, relances, rapports, synchronisation d'outils. Jusqu'à 10h/semaine récupérées. ROI en moins de 2 mois.</p>
-            <span class="timeline-badge">10 h/semaine récupérées</span>
+            <div class="date">Sept. 2023 – mai 2024</div>
+            <h3>Comprendre et pratiquer l'informatique – CNAM</h3>
+            <p>Remise à niveau académique en parallèle de l'activité de développeur applications.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="date">Sept. 2010 – sept. 2025</div>
+            <h3>Développeur applications – Freelance.com (15 ans)</h3>
+            <p>Conception d'outils métiers pour fiabiliser des process complexes (secteur public, PME) : surveillance tarifaire (Python/Streamlit), plateforme de pilotage chantiers (Django REST), agent IA de génération de rapports PDF, outils VBA/Excel.</p>
+            <span class="timeline-badge">15 ans à fiabiliser des process métier</span>
           </div>
         </div>
 
@@ -281,6 +665,15 @@
           </div>
         </div>
 
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="date">Sept. 1999 – juin 2001</div>
+            <h3>BTS Informatique de gestion, développeur d'application – ESUP</h3>
+            <p>Formation initiale en développement.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -290,38 +683,32 @@
     <h2>Vous voulez le même résultat ?</h2>
     <p>Décrivez-moi vos tâches les plus chronophages. Je reviens vers vous sous 24h avec une proposition concrète et chiffrée.</p>
 
-      
-        <!-- CONTACT -->
-
-  <a data-tally-open="WO26DL" data-tally-emoji-text="👋">
-    <span class="btn-primary">Parlez de votre projet</span>
-  </a>
-
-
-
+    <!-- CONTACT -->
+    <a data-tally-open="WO26DL" data-tally-emoji-text="👋">
+      <span class="btn-primary">Parlez de votre projet</span>
+    </a>
   </section>
 
   <!-- FOOTER -->
   <footer>
     © Emmanuel Ruaudel –
     <a href="https://rennesdev.fr/">rennesdev.fr</a> ·
-    <a href="https://www.linkedin.com/in/emmanuelruaudel-bb5059362" target="_blank">LinkedIn</a> ·
-    <a href="https://www.malt.fr/profile/emmanuelruaudel" target="_blank">Malt</a>
+    <a href="https://www.linkedin.com/in/emmanuel-ruaudel-bb5059362/" target="_blank">LinkedIn</a> ·
+    <a href="https://www.malt.fr/profile/emmanuelruaudel" target="_blank">Malt</a> ·
+    <a href="https://github.com/Ruaudel-Emmanuel" target="_blank">GitHub</a> ·
+    <a href="mailto:ruaudel.emmanuel@orange.fr">ruaudel.emmanuel@orange.fr</a>
   </footer>
 
   <!-- JS FILTRES -->
   <script>
     function filterCards(category, btn) {
-      // Mise à jour bouton actif
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      // Filtrage des cartes
       document.querySelectorAll('.case-card').forEach(card => {
         const cats = card.dataset.category || '';
         if (category === 'all' || cats.includes(category)) {
           card.style.display = '';
-          // Petite animation
           card.style.opacity = '0';
           card.style.transform = 'translateY(10px)';
           setTimeout(() => {
@@ -338,4 +725,3 @@
 
 </body>
 </html>
-<!--  -->
