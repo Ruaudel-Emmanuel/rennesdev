@@ -1,93 +1,85 @@
-# RennesDev Website
+# RennesDev — Freelance Automation & DevOps
 
-Official static website for RennesDev, the freelance business of Emmanuel Ruaudel.
+> **Site vitrine** d'Emmanuel Ruaudel — freelance spécialisé dans l'automatisation, l'intégration d'API et l'infrastructure DevOps pour PME/TPE.  
+> 🚀 [rennesdev.fr](https://rennesdev.fr)
 
-This project is a lightweight HTML/CSS website focused on:
-- clear positioning for SMEs and independent professionals,
-- better technical SEO foundations,
-- simple maintenance and deployment,
-- compatibility with standard static hosting environments such as Infomaniak.
+---
 
-## Project Goal
+## 🎯 Positionnement
 
-The website promotes freelance services around:
-- python automatisation 
-- API integrations,
-- workflow automation,
-- dashboards and operational tools,
-- process optimization for small businesses.
+### Pour qui ?
+- **PME/TPE** qui perdent du temps dans des tâches répétitives (saisie, suivis, rapports)
+- **Indépendants** qui veulent automatiser leur prospection, devis, facturation
+- **Startups** qui ont besoin d'un coup d'avance sur leur infra sans embaucher un CTO
 
-The site is designed to stay simple, fast, readable, and easy to update without a framework.
+### Ce que je résous
 
-## Current Stack
+| Problème | Solution |
+|---|---|
+| « Je perds 10h/semaine en saisie manuelle » | Workflows n8n → automatisation complète |
+| « Mes données sont éparpillées (email, Drive, papier) » | Centralisation + synchronisation |
+| « Je ne sais pas ce qui se passe sur mon serveur » | Monitoring + alertes Telegram |
+| « La facturation électronique m'angoisse » | Générateur Factur-X conformité EN 16931 |
 
-- HTML5
-- CSS3
-- Static assets
-- Tally form integration
-- Google Tag Manager
-- JSON-LD structured data
+---
 
-No JavaScript framework, no build step, no backend required.
+## ✨ Compétences démontrées
 
-## File Structure
+| Compétence | Réalisation concrète |
+|---|---|
+| **🤖 Automation (n8n)** | 10+ workflows en production : audits GitHub quotidiens, alertes Stripe/Tally, veille concurrentielle, diffusion Discord |
+| **🐍 Python** | API REST, génération PDF/A-3, scraping, transcription audio (Whisper), analyse fiscale |
+| **☁️ DevOps / Self-host** | VPS OVH (Docker, Caddy, UFW, fail2ban, Kopia backups), Tailscale, Cloudflare |
+| **🧠 IA locale (Ollama)** | Modèles LLM en auto-hébergement pour analyses, descriptions, résumés — zéro cloud |
+| **🌐 Web dev (HTML/CSS/JS)** | Sites statiques optimisés SEO, lecteur PDF Android (Capacitor), dashboards interactifs |
+| **📱 Android (Capacitor)** | Application Lecteur-PDF publiée en test fermé Google Play (100% offline, 0 permissions) |
+| **🔧 GitHub CI/CD** | Workflows GitHub Actions, PR automatisées, audit de code quotidien |
 
-```text
+---
+
+## 🏗️ Stack du site
+
+```
 rennesdev.fr/
-├── index.html
-├── portofolio.html
+├── index.html        ← Page d'accueil (présentation services)
+├── portofolio.html   ← Réalisations clients
 └── assets/
-    ├── css/
-    │   └── style.css
+    ├── css/style.css
     └── img/
-        └── banniere-codeur.jpg
 ```
 
-## Important Paths
+- **HTML5 + CSS3** (zéro framework, zéro build)
+- **JSON-LD** (données structurées SEO)
+- **Tally** (formulaire de contact)
+- **Google Tag Manager** (analytics)
+- Hébergement **Infomaniak** (statique, rapide)
 
-Because the site is deployed with this structure, asset paths must match it exactly.
+---
 
-### In `index.html`
+## 🚀 Résultats chiffrés
 
-CSS:
-```html
-<link rel="stylesheet" href="./assets/css/style.css">
-```
+- **15+ projets** livrés ou en cours (voir [portofolio](https://rennesdev.fr/portofolio.html))
+- **10+ workflows n8n** automatisés en production
+- **1 app Android** en test fermé Google Play (100+ testeurs)
+- **1 VPS** géré avec monitoring, alertes, backups automatisés
+- **0** data leak, **0** downtime critique depuis la mise en place
 
-Hero image:
-```html
-<img src="./assets/img/banniere-codeur.jpg" alt="" class="hero__bg">
-```
+---
 
-Social preview image:
-```html
-<meta property="og:image" content="https://rennesdev.fr/assets/img/banniere-codeur.jpg">
-<meta name="twitter:image" content="https://rennesdev.fr/assets/img/banniere-codeur.jpg">
-```
+## 🔗 Liens utiles
 
-## SEO Improvements Included
+| Projet | Description |
+|---|---|
+| [GitHub-Auditor](https://github.com/Ruaudel-Emmanuel/GitHub-Auditor) | Audit quotidien IA de tous vos repos GitHub |
+| [Lecteur-PDF](https://github.com/Ruaudel-Emmanuel/Lecteur-PDF) | Lecteur PDF Android 100% offline, sans pub |
+| [Fiscale-vps](https://github.com/Ruaudel-Emmanuel/Fiscale-vps) | Générateur Factur-X conforme EN 16931 |
+| [surveillance-tarifaire](https://github.com/Ruaudel-Emmanuel/surveillance-tarifaire) | Dashboard veille concurrentielle temps réel |
+| [Audio-Transcriber](https://github.com/Ruaudel-Emmanuel/Audio-Transcriber) | Transcription audio locale (Whisper) |
 
-The current version includes:
-- a unique title tag,
-- a meta description,
-- canonical URL,
-- Open Graph tags,
-- Twitter Card tags,
-- structured data with `ProfessionalService`,
-- semantic section structure,
-- internal anchor navigation,
-- service-oriented headings,
-- local intent around Rennes and Brittany.
+---
 
-These elements support technical SEO, content clarity, and better page interpretation by search engines. [web:83][web:86]
+## 📬 Contact
 
-## Navigation
-
-The main navigation currently links to:
-- Services
-- Portfolio
-- About
-- Contact
-
-If the portfolio page keeps the current filename, use:
-```html
+- 🌐 [rennesdev.fr](https://rennesdev.fr) — formulaire Tally
+- 💬 [Malt](https://www.malt.fr/profile/emmanuelruaudel)
+- 🐙 [GitHub](https://github.com/Ruaudel-Emmanuel)
