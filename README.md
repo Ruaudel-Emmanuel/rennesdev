@@ -1,4 +1,4 @@
-# RennesDev — Freelance Automation & DevOps
+# RennesDev — Directeur de la Transformation Numérique — Automatisation & IA pour TPE/PME
 
 > **Site vitrine** d'Emmanuel Ruaudel — freelance spécialisé dans l'automatisation, l'intégration d'API et l'infrastructure DevOps pour PME/TPE.  
 > 🚀 [rennesdev.fr](https://rennesdev.fr)
