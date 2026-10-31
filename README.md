@@ -1,5 +1,3 @@
-1️⃣ README du repo rennesdev
-
 # RennesDev — Directeur de la Transformation Numérique
 
 > **Site vitrine** d'Emmanuel Ruaudel — automatisation, intégration d'API et infrastructure DevOps pour TPE/PME.
