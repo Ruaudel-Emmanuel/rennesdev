@@ -1,4 +1,4 @@
-# RennesDev — Directeur de la Transformation Numérique — Automatisation & IA pour TPE/PME
+# Site vitrine d'Emmanuel Ruaudel — Directeur de la Transformation Numérique pour TPE/PME : automatisation, intégration d'API et infrastructure DevOps.
 
 > **Site vitrine** d'Emmanuel Ruaudel — Directeur de la Transformation Numérique pour TPE/PME , l'intégration d'API et l'infrastructure DevOps pour PME/TPE.  
 > 🚀 [rennesdev.fr](https://rennesdev.fr)
